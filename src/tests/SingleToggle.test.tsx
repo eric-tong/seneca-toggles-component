@@ -1,9 +1,25 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from '../App';
+import SingleToggle, {SingleToggleProps} from "../components/SingleToggle";
+import {mount, ReactWrapper} from "enzyme";
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
+describe("SingleToggle", () => {
+    let props: SingleToggleProps;
+    let mountedSingleToggle: ReactWrapper | undefined;
+
+    const getMountedSingleToggle = () => {
+        if (!mountedSingleToggle) {
+            mountedSingleToggle = mount(
+                <SingleToggle {...props} />
+            );
+        }
+        return mountedSingleToggle;
+    };
+
+    beforeEach(() => {
+        props = {
+            options: ["Option 1", "Option 2"]
+        };
+        mountedSingleToggle = undefined;
+    });
+
 });
