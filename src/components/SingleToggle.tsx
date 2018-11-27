@@ -1,8 +1,9 @@
-import {Component} from "react";
 import React from "react";
+import {Component} from "react";
+import SingleToggleOption from "./SingleToggleOption";
 
 export interface SingleToggleProps {
-    options: [string, string];
+    optionsContent: [string, string];
 }
 
 export interface SingleToggleState {
@@ -13,8 +14,9 @@ export default class SingleToggle extends Component<SingleToggleProps, SingleTog
     render() {
         return (
             <div>
-                <div className="option">{this.props.options[0]}</div>
-                <div className="option">{this.props.options[1]}</div>
+                {this.props.optionsContent.map((option, index) =>
+                    <SingleToggleOption key={index} content={option} isActive={true}/>
+                )}
             </div>
         );
     }

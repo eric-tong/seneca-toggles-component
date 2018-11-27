@@ -13,21 +13,28 @@ describe("SingleToggle", () => {
 
     beforeEach(() => {
         props = {
-            options: [leftOptionContent, rightOptionContent]
+            optionsContent: [leftOptionContent, rightOptionContent]
         };
         singleToggle = mount(
             <SingleToggle {...props} />
         );
     });
 
-    it("Contains two options", () => {
+    it("Contains two optionsContent", () => {
         const optionDivs = singleToggle.find(".option");
-        expect(optionDivs.length).toEqual(2);
+
+        const actual = optionDivs.length;
+        const expected = 2;
+
+        expect(actual).toEqual(expected);
     });
 
-    it("Contains options with content based on props", () => {
+    it("Contains optionsContent with content based on props", () => {
         const optionDivs = singleToggle.find(".option");
-        expect(optionDivs.at(0).text()).toEqual(leftOptionContent);
-        expect(optionDivs.at(1).text()).toEqual(rightOptionContent);
+
+        const actual = [optionDivs.at(0).text(), optionDivs.at(1).text()];
+        const expected = [leftOptionContent, rightOptionContent];
+
+        expect(actual).toEqual(expected);
     });
 });

@@ -4,7 +4,7 @@ import SingleToggle from "./components/SingleToggle";
 class App extends Component {
   render() {
     return (
-      <SingleToggle />
+      <SingleToggle optionsContent={["Option 1", "Option 2"]} />
     );
   }
 }
