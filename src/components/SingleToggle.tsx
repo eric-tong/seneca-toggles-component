@@ -12,7 +12,10 @@ export interface SingleToggleState {
 export default class SingleToggle extends Component<SingleToggleProps, SingleToggleState> {
     render() {
         return (
-            <div>Toggle</div>
+            <div>
+                <div className="option">Toggle</div>
+                <div className="option">Toggle</div>
+            </div>
         );
     }
 }
