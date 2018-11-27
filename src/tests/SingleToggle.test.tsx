@@ -1,25 +1,28 @@
 import React from 'react';
+import {configure, mount, ReactWrapper} from "enzyme";
+import Adapter from 'enzyme-adapter-react-16';
 import SingleToggle, {SingleToggleProps} from "../components/SingleToggle";
-import {mount, ReactWrapper} from "enzyme";
 
+const leftOptionContent = "Option 1";
+const rightOptionContent = "Option 2";
+
+configure({adapter: new Adapter()});
 describe("SingleToggle", () => {
     let props: SingleToggleProps;
-    let mountedSingleToggle: ReactWrapper | undefined;
-
-    const getMountedSingleToggle = () => {
-        if (!mountedSingleToggle) {
-            mountedSingleToggle = mount(
-                <SingleToggle {...props} />
-            );
-        }
-        return mountedSingleToggle;
-    };
+    let singleToggle: ReactWrapper;
 
     beforeEach(() => {
         props = {
-            options: ["Option 1", "Option 2"]
+            options: [leftOptionContent, rightOptionContent]
         };
-        mountedSingleToggle = undefined;
+        singleToggle = mount(
+            <SingleToggle {...props} />
+        );
+    });
+
+    it("contains two options", () => {
+        const optionDivs = singleToggle.find(".option");
+        expect(optionDivs.length).toEqual(2);
     });
 
 });
