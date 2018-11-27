@@ -20,9 +20,14 @@ describe("SingleToggle", () => {
         );
     });
 
-    it("contains two options", () => {
+    it("Contains two options", () => {
         const optionDivs = singleToggle.find(".option");
         expect(optionDivs.length).toEqual(2);
     });
 
+    it("Contains options with content based on props", () => {
+        const optionDivs = singleToggle.find(".option");
+        expect(optionDivs.at(0).text()).toEqual(leftOptionContent);
+        expect(optionDivs.at(1).text()).toEqual(rightOptionContent);
+    });
 });

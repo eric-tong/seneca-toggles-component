@@ -13,8 +13,8 @@ export default class SingleToggle extends Component<SingleToggleProps, SingleTog
     render() {
         return (
             <div>
-                <div className="option">Toggle</div>
-                <div className="option">Toggle</div>
+                <div className="option">{this.props.options[0]}</div>
+                <div className="option">{this.props.options[1]}</div>
             </div>
         );
     }
