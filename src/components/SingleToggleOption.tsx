@@ -10,9 +10,17 @@ export interface SingleToggleProps {
 export default class SingleToggleOption extends Component<SingleToggleProps> {
     render() {
         return (
-            <div className="option" onClick={this.props.onClick}>
+            <div className={this.getClassNames()} onClick={this.props.onClick}>
                 {this.props.content}
             </div>
         );
+    }
+
+    getClassNames = () => {
+        let className = "option";
+        if (this.props.isActive) {
+            className += " active";
+        }
+        return className;
     }
 }

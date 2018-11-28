@@ -38,7 +38,7 @@ describe("SingleToggle", () => {
         expect(actual).toEqual(expected);
     });
 
-    it("Sets right option as active when clicked", () => {
+    it("Sets right option index as active when clicked", () => {
         singleToggle.setState({activeIndex: 0});
         const optionDivs = singleToggle.find(".option");
         const rightOptionDiv = optionDivs.at(1);
@@ -50,15 +50,26 @@ describe("SingleToggle", () => {
         expect(actual).toEqual(expected);
     });
 
-    it("Sets left option as active when clicked", () => {
+    it("Sets left option index as active when clicked", () => {
         singleToggle.setState({activeIndex: 1});
         const optionDivs = singleToggle.find(".option");
-        const rightOptionDiv = optionDivs.at(0);
+        const leftOptionDiv = optionDivs.at(0);
 
-        rightOptionDiv.simulate('click');
+        leftOptionDiv.simulate('click');
         const actual = singleToggle.state().activeIndex;
         const expected = 0;
 
         expect(actual).toEqual(expected);
+    });
+
+    it("Right option contains active class when clicked", () => {
+        singleToggle.setState({activeIndex: 0});
+        const optionDivs = singleToggle.find(".option");
+        const rightOptionDiv = optionDivs.at(1);
+
+        rightOptionDiv.simulate('click');
+        const actual = rightOptionDiv.hasClass("active");
+
+        expect(actual).toBeTruthy();
     });
 });
