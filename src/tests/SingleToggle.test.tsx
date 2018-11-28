@@ -3,8 +3,8 @@ import {configure, mount, ReactWrapper} from "enzyme";
 import Adapter from 'enzyme-adapter-react-16';
 import SingleToggle, {SingleToggleProps, SingleToggleState} from "../components/SingleToggle";
 
-const leftOptionContent = "Option 1";
-const rightOptionContent = "Option 2";
+const leftAnswer = "Answer 1";
+const rightAnswer = "Answer 2";
 
 configure({adapter: new Adapter()});
 describe("SingleToggle", () => {
@@ -13,95 +13,95 @@ describe("SingleToggle", () => {
 
     beforeEach(() => {
         props = {
-            optionsContent: [leftOptionContent, rightOptionContent]
+            answers: [leftAnswer, rightAnswer]
         };
         singleToggle = mount(
             <SingleToggle {...props} />
         );
     });
 
-    it("Contains two optionsContent", () => {
-        const optionDivs = singleToggle.find(".option");
+    it("Contains two answersContent", () => {
+        const answerDivs = singleToggle.find(".answer");
 
-        const actual = optionDivs.length;
+        const actual = answerDivs.length;
         const expected = 2;
 
         expect(actual).toEqual(expected);
     });
 
-    it("Contains optionsContent with content based on props", () => {
-        const optionDivs = singleToggle.find(".option");
+    it("Contains answersContent with content based on props", () => {
+        const answerDivs = singleToggle.find(".answer");
 
-        const actual = [optionDivs.at(0).text(), optionDivs.at(1).text()];
-        const expected = [leftOptionContent, rightOptionContent];
+        const actual = [answerDivs.at(0).text(), answerDivs.at(1).text()];
+        const expected = [leftAnswer, rightAnswer];
 
         expect(actual).toEqual(expected);
     });
 
-    it("Sets right option index as active when clicked", () => {
+    it("Sets right answer index as active when clicked", () => {
         singleToggle.setState({activeIndex: 0});
-        const optionDivs = singleToggle.find(".option");
-        const rightOptionDiv = optionDivs.at(1);
+        const answerDivs = singleToggle.find(".answer");
+        const rightAnswerDiv = answerDivs.at(1);
 
-        rightOptionDiv.simulate('click');
+        rightAnswerDiv.simulate('click');
         const actual = singleToggle.state().activeIndex;
         const expected = 1;
 
         expect(actual).toEqual(expected);
     });
 
-    it("Sets left option index as active when clicked", () => {
+    it("Sets left answer index as active when clicked", () => {
         singleToggle.setState({activeIndex: 1});
-        const optionDivs = singleToggle.find(".option");
-        const leftOptionDiv = optionDivs.at(0);
+        const answerDivs = singleToggle.find(".answer");
+        const leftAnswerDiv = answerDivs.at(0);
 
-        leftOptionDiv.simulate('click');
+        leftAnswerDiv.simulate('click');
         const actual = singleToggle.state().activeIndex;
         const expected = 0;
 
         expect(actual).toEqual(expected);
     });
 
-    it("Right option contains active class when clicked", () => {
+    it("Right answer contains active class when clicked", () => {
         singleToggle.setState({activeIndex: 0});
-        const optionDivs = singleToggle.find(".option");
-        const rightOptionDiv = optionDivs.at(1);
+        const answerDivs = singleToggle.find(".answer");
+        const rightAnswerDiv = answerDivs.at(1);
 
-        rightOptionDiv.simulate('click');
-        const hasActiveClass = singleToggle.find(".option").at(1).hasClass("active");
+        rightAnswerDiv.simulate('click');
+        const hasActiveClass = singleToggle.find(".answer").at(1).hasClass("active");
 
         expect(hasActiveClass).toBeTruthy();
     });
 
-    it("Left option does not contain active class when right option clicked", () => {
+    it("Left answer does not contain active class when right answer is clicked", () => {
         singleToggle.setState({activeIndex: 0});
-        const optionDivs = singleToggle.find(".option");
-        const rightOptionDiv = optionDivs.at(1);
+        const answerDivs = singleToggle.find(".answer");
+        const rightAnswerDiv = answerDivs.at(1);
 
-        rightOptionDiv.simulate('click');
-        const hasActiveClass = singleToggle.find(".option").at(0).hasClass("active");
+        rightAnswerDiv.simulate('click');
+        const hasActiveClass = singleToggle.find(".answer").at(0).hasClass("active");
 
         expect(hasActiveClass).toBeFalsy();
     });
 
-    it("Left option contains active class when clicked", () => {
+    it("Left answer contains active class when clicked", () => {
         singleToggle.setState({activeIndex: 1});
-        const optionDivs = singleToggle.find(".option");
-        const leftOptionDiv = optionDivs.at(0);
+        const answerDivs = singleToggle.find(".answer");
+        const leftAnswerDiv = answerDivs.at(0);
 
-        leftOptionDiv.simulate('click');
-        const hasActiveClass = singleToggle.find(".option").at(0).hasClass("active");
+        leftAnswerDiv.simulate('click');
+        const hasActiveClass = singleToggle.find(".answer").at(0).hasClass("active");
 
         expect(hasActiveClass).toBeTruthy();
     });
 
-    it("Right option does not contain active class when right option clicked", () => {
+    it("Right answer does not contain active class when left answer is clicked", () => {
         singleToggle.setState({activeIndex: 1});
-        const optionDivs = singleToggle.find(".option");
-        const rightOptionDiv = optionDivs.at(0);
+        const answerDivs = singleToggle.find(".answer");
+        const leftAnswerDiv = answerDivs.at(0);
 
-        rightOptionDiv.simulate('click');
-        const hasActiveClass = singleToggle.find(".option").at(1).hasClass("active");
+        leftAnswerDiv.simulate('click');
+        const hasActiveClass = singleToggle.find(".answer").at(1).hasClass("active");
 
         expect(hasActiveClass).toBeFalsy();
     });

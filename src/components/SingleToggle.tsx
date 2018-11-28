@@ -1,16 +1,16 @@
 import React from "react";
 import {Component} from "react";
-import SingleToggleOption from "./SingleToggleOption";
+import SingleToggleAnswer from "./SingleToggleAnswer";
 
 export interface SingleToggleProps {
-    optionsContent: [string, string];
+    answers: [string, string];
 }
 
 export interface SingleToggleState {
     activeIndex: 0 | 1;
 }
 
-export default class SingleToggle extends Component<SingleToggleProps, SingleToggleState> {
+export default class SingleTogglesContainer extends Component<SingleToggleProps, SingleToggleState> {
     constructor(props: SingleToggleProps) {
         super(props);
         this.state = {
@@ -21,10 +21,10 @@ export default class SingleToggle extends Component<SingleToggleProps, SingleTog
     render() {
         return (
             <div>
-                {this.props.optionsContent.map((option, index) =>
-                    <SingleToggleOption
+                {this.props.answers.map((answer, index) =>
+                    <SingleToggleAnswer
                         key={index}
-                        content={option}
+                        content={answer}
                         isActive={index == this.state.activeIndex}
                         onClick={() => this.setActiveState(index)}
                     />

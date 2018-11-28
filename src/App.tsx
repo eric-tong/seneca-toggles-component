@@ -5,7 +5,7 @@ import "./styles/base-styles.css";
 class App extends Component {
   render() {
     return (
-      <SingleToggle optionsContent={["Option 1", "Option 2"]} />
+      <SingleToggle answers={["Answer 1", "Answer 2"]} />
     );
   }
 }
