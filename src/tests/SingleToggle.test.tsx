@@ -83,4 +83,26 @@ describe("SingleToggle", () => {
 
         expect(hasActiveClass).toBeFalsy();
     });
+
+    it("Left option contains active class when clicked", () => {
+        singleToggle.setState({activeIndex: 1});
+        const optionDivs = singleToggle.find(".option");
+        const leftOptionDiv = optionDivs.at(0);
+
+        leftOptionDiv.simulate('click');
+        const hasActiveClass = singleToggle.find(".option").at(0).hasClass("active");
+
+        expect(hasActiveClass).toBeTruthy();
+    });
+
+    it("Right option does not contain active class when right option clicked", () => {
+        singleToggle.setState({activeIndex: 1});
+        const optionDivs = singleToggle.find(".option");
+        const rightOptionDiv = optionDivs.at(0);
+
+        rightOptionDiv.simulate('click');
+        const hasActiveClass = singleToggle.find(".option").at(1).hasClass("active");
+
+        expect(hasActiveClass).toBeFalsy();
+    });
 });
