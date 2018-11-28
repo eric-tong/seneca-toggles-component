@@ -1,7 +1,7 @@
 import React from 'react';
 import {configure, mount, ReactWrapper} from "enzyme";
 import Adapter from 'enzyme-adapter-react-16';
-import SingleToggle, {SingleToggleProps} from "../components/SingleToggle";
+import SingleToggle, {SingleToggleProps, SingleToggleState} from "../components/SingleToggle";
 
 const leftOptionContent = "Option 1";
 const rightOptionContent = "Option 2";
@@ -9,7 +9,7 @@ const rightOptionContent = "Option 2";
 configure({adapter: new Adapter()});
 describe("SingleToggle", () => {
     let props: SingleToggleProps;
-    let singleToggle: ReactWrapper;
+    let singleToggle: ReactWrapper<SingleToggleProps, SingleToggleState, SingleToggle>;
 
     beforeEach(() => {
         props = {
@@ -34,6 +34,18 @@ describe("SingleToggle", () => {
 
         const actual = [optionDivs.at(0).text(), optionDivs.at(1).text()];
         const expected = [leftOptionContent, rightOptionContent];
+
+        expect(actual).toEqual(expected);
+    });
+
+    it("Sets option index as active when clicked", () => {
+        singleToggle.setState({activeIndex: 0});
+        const optionDivs = singleToggle.find(".option");
+        const rightOptionDiv = optionDivs.at(1);
+
+        rightOptionDiv.simulate('click');
+        const actual = singleToggle.state().activeIndex;
+        const expected = 1;
 
         expect(actual).toEqual(expected);
     });

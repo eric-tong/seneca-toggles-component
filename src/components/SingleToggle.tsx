@@ -15,9 +15,20 @@ export default class SingleToggle extends Component<SingleToggleProps, SingleTog
         return (
             <div>
                 {this.props.optionsContent.map((option, index) =>
-                    <SingleToggleOption key={index} content={option} isActive={true}/>
+                    <SingleToggleOption
+                        key={index}
+                        content={option}
+                        isActive={true}
+                        onClick={() => this.setActiveState(index == 0 ? 0 : 1)}
+                    />
                 )}
             </div>
         );
+    }
+
+    setActiveState = (activeIndex: 0 | 1) => {
+        this.setState({
+            activeIndex: activeIndex
+        });
     }
 }
