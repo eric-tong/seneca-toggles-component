@@ -3,7 +3,7 @@ import {Component} from "react";
 import SingleToggleAnswer from "./SingleToggleAnswer";
 
 export interface SingleToggleProps {
-    answers: [string, string];
+    answerPair: [string, string];
     activeIndex: 0 | 1;
     onActiveIndexChange: (activeIndex: 0 | 1) => void;
 }
@@ -18,8 +18,8 @@ export default class SingleToggle extends Component<SingleToggleProps, {}> {
 
     render() {
         return (
-            <div>
-                {this.props.answers.map((answer, index) =>
+            <div className="single-toggle">
+                {this.props.answerPair.map((answer, index) =>
                     <SingleToggleAnswer
                         key={index}
                         content={answer}

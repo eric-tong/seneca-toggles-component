@@ -16,7 +16,7 @@ describe("SingleToggle", () => {
 
     beforeEach(() => {
         props = {
-            answers: [leftAnswer, rightAnswer],
+            answerPair: [leftAnswer, rightAnswer],
             activeIndex: 0,
             onActiveIndexChange: setActiveState
         };

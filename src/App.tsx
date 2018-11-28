@@ -5,7 +5,7 @@ import "./styles/base-styles.css";
 class App extends Component {
   render() {
     return (
-      <SingleToggle answers={["Answer 1", "Answer 2"]} activeIndex={0}/>
+      <SingleToggle answerPair={["Answer 1", "Answer 2"]} activeIndex={0}/>
     );
   }
 }
