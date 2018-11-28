@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SingleToggle from "./components/SingleToggle";
+import "./styles/base-styles.css";
 
 class App extends Component {
   render() {
