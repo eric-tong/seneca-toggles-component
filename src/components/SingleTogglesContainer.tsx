@@ -10,10 +10,10 @@ export default class SingleTogglesContainer extends Component<SingleTogglesConta
     render() {
         return (
             <div>
-                {this.props.answerPairs.map((answer, index) =>
+                {this.props.answerPairs.map((answerPair, index) =>
                     <SingleToggle
                         key={index}
-                        answerPair={answer}
+                        answerPair={answerPair}
                         activeIndex={0}
                         onActiveIndexChange={() => {
                         }}/>
