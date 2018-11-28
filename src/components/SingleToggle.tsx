@@ -4,13 +4,11 @@ import SingleToggleAnswer from "./SingleToggleAnswer";
 
 export interface SingleToggleProps {
     answers: [string, string];
-}
-
-export interface SingleToggleState {
     activeIndex: 0 | 1;
+    onActiveIndexChange: (activeIndex: 0 | 1) => void;
 }
 
-export default class SingleTogglesContainer extends Component<SingleToggleProps, SingleToggleState> {
+export default class SingleToggle extends Component<SingleToggleProps, {}> {
     constructor(props: SingleToggleProps) {
         super(props);
         this.state = {
@@ -25,17 +23,11 @@ export default class SingleTogglesContainer extends Component<SingleToggleProps,
                     <SingleToggleAnswer
                         key={index}
                         content={answer}
-                        isActive={index == this.state.activeIndex}
-                        onClick={() => this.setActiveState(index)}
+                        isActive={index == this.props.activeIndex}
+                        onClick={() => this.props.onActiveIndexChange(index ? 1 : 0)}
                     />
                 )}
             </div>
         );
-    }
-
-    setActiveState = (activeIndex: number) => {
-        this.setState({
-            activeIndex: activeIndex ? 1 : 0
-        });
     }
 }

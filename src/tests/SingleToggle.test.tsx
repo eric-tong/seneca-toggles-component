@@ -1,7 +1,7 @@
 import React from 'react';
 import {configure, mount, ReactWrapper} from "enzyme";
 import Adapter from 'enzyme-adapter-react-16';
-import SingleToggle, {SingleToggleProps, SingleToggleState} from "../components/SingleToggle";
+import SingleToggle, {SingleToggleProps} from "../components/SingleToggle";
 
 const leftAnswer = "Answer 1";
 const rightAnswer = "Answer 2";
@@ -9,11 +9,16 @@ const rightAnswer = "Answer 2";
 configure({adapter: new Adapter()});
 describe("SingleToggle", () => {
     let props: SingleToggleProps;
-    let singleToggle: ReactWrapper<SingleToggleProps, SingleToggleState, SingleToggle>;
+    let singleToggle: ReactWrapper<SingleToggleProps, {}, SingleToggle>;
+    let setActiveState = (activeIndex: 0 | 1) => {
+        singleToggle.setProps({activeIndex: activeIndex});
+    };
 
     beforeEach(() => {
         props = {
-            answers: [leftAnswer, rightAnswer]
+            answers: [leftAnswer, rightAnswer],
+            activeIndex: 0,
+            onActiveIndexChange: setActiveState
         };
         singleToggle = mount(
             <SingleToggle {...props} />
@@ -39,31 +44,31 @@ describe("SingleToggle", () => {
     });
 
     it("Sets right answer index as active when clicked", () => {
-        singleToggle.setState({activeIndex: 0});
+        singleToggle.setProps({activeIndex: 0});
         const answerDivs = singleToggle.find(".answer");
         const rightAnswerDiv = answerDivs.at(1);
 
         rightAnswerDiv.simulate('click');
-        const actual = singleToggle.state().activeIndex;
+        const actual = singleToggle.props().activeIndex;
         const expected = 1;
 
         expect(actual).toEqual(expected);
     });
 
     it("Sets left answer index as active when clicked", () => {
-        singleToggle.setState({activeIndex: 1});
+        singleToggle.setProps({activeIndex: 1});
         const answerDivs = singleToggle.find(".answer");
         const leftAnswerDiv = answerDivs.at(0);
 
         leftAnswerDiv.simulate('click');
-        const actual = singleToggle.state().activeIndex;
+        const actual = singleToggle.props().activeIndex;
         const expected = 0;
 
         expect(actual).toEqual(expected);
     });
 
     it("Right answer contains active class when clicked", () => {
-        singleToggle.setState({activeIndex: 0});
+        singleToggle.setProps({activeIndex: 0});
         const answerDivs = singleToggle.find(".answer");
         const rightAnswerDiv = answerDivs.at(1);
 
@@ -74,7 +79,7 @@ describe("SingleToggle", () => {
     });
 
     it("Left answer does not contain active class when right answer is clicked", () => {
-        singleToggle.setState({activeIndex: 0});
+        singleToggle.setProps({activeIndex: 0});
         const answerDivs = singleToggle.find(".answer");
         const rightAnswerDiv = answerDivs.at(1);
 
@@ -85,7 +90,7 @@ describe("SingleToggle", () => {
     });
 
     it("Left answer contains active class when clicked", () => {
-        singleToggle.setState({activeIndex: 1});
+        singleToggle.setProps({activeIndex: 1});
         const answerDivs = singleToggle.find(".answer");
         const leftAnswerDiv = answerDivs.at(0);
 
@@ -96,7 +101,7 @@ describe("SingleToggle", () => {
     });
 
     it("Right answer does not contain active class when left answer is clicked", () => {
-        singleToggle.setState({activeIndex: 1});
+        singleToggle.setProps({activeIndex: 1});
         const answerDivs = singleToggle.find(".answer");
         const leftAnswerDiv = answerDivs.at(0);
 
