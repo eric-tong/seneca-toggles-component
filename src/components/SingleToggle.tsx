@@ -11,6 +11,13 @@ export interface SingleToggleState {
 }
 
 export default class SingleToggle extends Component<SingleToggleProps, SingleToggleState> {
+    constructor(props: SingleToggleProps) {
+        super(props);
+        this.state = {
+            activeIndex: 0
+        };
+    }
+
     render() {
         return (
             <div>
@@ -18,17 +25,17 @@ export default class SingleToggle extends Component<SingleToggleProps, SingleTog
                     <SingleToggleOption
                         key={index}
                         content={option}
-                        isActive={true}
-                        onClick={() => this.setActiveState(index == 0 ? 0 : 1)}
+                        isActive={index == this.state.activeIndex}
+                        onClick={() => this.setActiveState(index)}
                     />
                 )}
             </div>
         );
     }
 
-    setActiveState = (activeIndex: 0 | 1) => {
+    setActiveState = (activeIndex: number) => {
         this.setState({
-            activeIndex: activeIndex
+            activeIndex: activeIndex ? 1 : 0
         });
     }
 }
