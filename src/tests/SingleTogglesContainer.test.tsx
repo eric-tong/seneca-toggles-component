@@ -1,10 +1,7 @@
 import React from 'react';
-import {configure, mount, ReactWrapper} from "enzyme";
+import {configure, mount} from "enzyme";
 import Adapter from 'enzyme-adapter-react-16';
-import SingleTogglesContainer, {
-    SingleTogglesContainerProps,
-    SingleTogglesContainerState
-} from "../components/SingleTogglesContainer";
+import SingleTogglesContainer from "../components/SingleTogglesContainer";
 
 const answers: [string, string][] = [
     ["Answer 1-1", "Answer 1-2"],
@@ -12,20 +9,14 @@ const answers: [string, string][] = [
     ["Answer 3-1", "Answer 3-2"],
     ["Answer 4-1", "Answer 4-2"]
 ];
-const activeIndices: (0 | 1)[] = [0, 1, 0, 1];
 
 configure({adapter: new Adapter()});
 describe("SingleToggle", () => {
-    let props: SingleTogglesContainerProps;
-    let singleTogglesContainer: ReactWrapper<SingleTogglesContainerProps, SingleTogglesContainerState, SingleTogglesContainer>;
+    let props = {answerPairs: answers};
+    let singleTogglesContainer = mount(<SingleTogglesContainer {...props} />);
 
     beforeEach(() => {
-        props = {
-            answerPairs: answers
-        };
-        singleTogglesContainer = mount(
-            <SingleTogglesContainer {...props} />
-        );
+        singleTogglesContainer.setProps(props);
     });
 
     it("Contains the number of toggles equal to number of answer pairs", () => {
@@ -52,6 +43,18 @@ describe("SingleToggle", () => {
     });
 
     it("Activates answers based on active indices", () => {
+        const activeIndices: (0 | 1)[] = [0, 1, 0, 1];
+        singleTogglesContainer.setState({activeIndices: activeIndices});
+        const singleToggleAnswerDivs = singleTogglesContainer.find(".active");
+
+        let actual = singleToggleAnswerDivs.map(singleToggleAnswerDiv => singleToggleAnswerDiv.text());
+        let expected = answers.map((answer, index) => answer[activeIndices[index]]);
+
+        expect(actual).toEqual(expected);
+    });
+
+    it("Activates answers based on active indices", () => {
+        const activeIndices: (0 | 1)[] = [0, 1, 0, 1];
         singleTogglesContainer.setState({activeIndices: activeIndices});
         const singleToggleAnswerDivs = singleTogglesContainer.find(".active");
 

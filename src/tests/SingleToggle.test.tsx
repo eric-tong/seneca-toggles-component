@@ -1,28 +1,24 @@
 import React from 'react';
-import {configure, mount, ReactWrapper} from "enzyme";
+import {configure, mount} from "enzyme";
 import Adapter from 'enzyme-adapter-react-16';
 import SingleToggle, {SingleToggleProps} from "../components/SingleToggle";
 
-const leftAnswer = "Answer 1";
-const rightAnswer = "Answer 2";
+const answerPair: [string, string] = ["Answer 1", "Answer 2"];
 
 configure({adapter: new Adapter()});
 describe("SingleToggle", () => {
-    let props: SingleToggleProps;
-    let singleToggle: ReactWrapper<SingleToggleProps, {}, SingleToggle>;
     let setActiveState = (activeIndex: 0 | 1) => {
         singleToggle.setProps({activeIndex: activeIndex});
     };
+    let props: SingleToggleProps = {
+        answerPair: answerPair,
+        activeIndex: 0,
+        onAnswerClick: setActiveState
+    };
+    let singleToggle = mount(<SingleToggle {...props} />);
 
     beforeEach(() => {
-        props = {
-            answerPair: [leftAnswer, rightAnswer],
-            activeIndex: 0,
-            onAnswerClick: setActiveState
-        };
-        singleToggle = mount(
-            <SingleToggle {...props} />
-        );
+        singleToggle.setProps(props);
     });
 
     it("Contains two answersContent", () => {
@@ -38,9 +34,8 @@ describe("SingleToggle", () => {
         const answerDivs = singleToggle.find(".answer");
 
         const actual = [answerDivs.at(0).text(), answerDivs.at(1).text()];
-        const expected = [leftAnswer, rightAnswer];
 
-        expect(actual).toEqual(expected);
+        expect(actual).toEqual(answerPair);
     });
 
     it("Sets right answer index as active when clicked", () => {
