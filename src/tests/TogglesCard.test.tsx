@@ -29,4 +29,32 @@ describe("TogglesCard", () => {
 
         expect(actual).toEqual(expected);
     });
+
+    it("Clicking on active answer does not switch active index", () => {
+        const activeAnswerIndices: (0 | 1)[] = [0, 0, 0, 0];
+        togglesCard.setProps({activeAnswerIndices: activeAnswerIndices});
+        const singleToggleAnswerDivs = togglesCard.find(".answer");
+
+        singleToggleAnswerDivs.at(0).simulate("click");
+        singleToggleAnswerDivs.at(4).simulate("click");
+
+        let actual = togglesCard.prop("activeAnswerIndices");
+        let expected = [0, 0, 0, 0];
+
+        expect(actual).toEqual(expected);
+    });
+
+    it("Clicking on inactive answer switches active index", () => {
+        const activeAnswerIndices: (0 | 1)[] = [0, 0, 0, 0];
+        togglesCard.setProps({activeAnswerIndices: activeAnswerIndices});
+        const singleToggleAnswerDivs = togglesCard.find(".answer");
+
+        singleToggleAnswerDivs.at(1).simulate("click");
+        singleToggleAnswerDivs.at(5).simulate("click");
+
+        let actual = togglesCard.prop("activeAnswerIndices");
+        let expected = [1, 0, 1, 0];
+
+        expect(actual).toEqual(expected);
+    });
 });
