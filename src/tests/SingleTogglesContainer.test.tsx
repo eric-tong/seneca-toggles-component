@@ -48,7 +48,7 @@ describe("SingleToggle", () => {
 
     it("Activates answers based on active indices", () => {
         const activeIndices: (0 | 1)[] = [0, 1, 0, 1];
-        singleTogglesContainer.setState({activeIndices: activeIndices});
+        singleTogglesContainer.setState({activeAnswerIndices: activeIndices});
         const singleToggleAnswerDivs = singleTogglesContainer.find(".active");
 
         let actual = singleToggleAnswerDivs.map(singleToggleAnswerDiv => singleToggleAnswerDiv.text());
@@ -59,12 +59,12 @@ describe("SingleToggle", () => {
 
     it("Clicking on active answer does not switch active index", () => {
         const activeIndices: (0 | 1)[] = [0, 0, 0, 0];
-        singleTogglesContainer.setState({activeIndices: activeIndices});
+        singleTogglesContainer.setState({activeAnswerIndices: activeIndices});
         const singleToggleAnswerDivs = singleTogglesContainer.find(".answer");
         singleToggleAnswerDivs.at(0).simulate("click");
         singleToggleAnswerDivs.at(4).simulate("click");
 
-        let actual = singleTogglesContainer.state().activeIndices;
+        let actual = singleTogglesContainer.state().activeAnswerIndices;
         let expected = [0, 0, 0, 0];
 
         expect(actual).toEqual(expected);
@@ -72,12 +72,12 @@ describe("SingleToggle", () => {
 
     it("Clicking on inactive answer switches active index", () => {
         const activeIndices: (0 | 1)[] = [0, 0, 0, 0];
-        singleTogglesContainer.setState({activeIndices: activeIndices});
+        singleTogglesContainer.setState({activeAnswerIndices: activeIndices});
         const singleToggleAnswerDivs = singleTogglesContainer.find(".answer");
         singleToggleAnswerDivs.at(1).simulate("click");
         singleToggleAnswerDivs.at(5).simulate("click");
 
-        let actual = singleTogglesContainer.state().activeIndices;
+        let actual = singleTogglesContainer.state().activeAnswerIndices;
         let expected = [1, 0, 1, 0];
 
         expect(actual).toEqual(expected);

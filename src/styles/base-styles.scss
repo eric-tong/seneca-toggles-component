@@ -1,3 +1,16 @@
-.active {
-  color: red;
+html {
+  font-size: 16px;
+}
+
+.single-toggle{
+  display: flex;
+
+  .answer {
+    margin: 1rem;
+    cursor: pointer;
+
+    &.active {
+      color: red;
+    }
+  }
 }
