@@ -11,6 +11,13 @@ export interface SingleTogglesContainerState {
 }
 
 export default class SingleTogglesContainer extends Component<SingleTogglesContainerProps, SingleTogglesContainerState> {
+    constructor(props: SingleTogglesContainerProps) {
+        super(props);
+        this.state = {
+            activeIndices: []
+        }
+    }
+
     render() {
         return (
             <div>
@@ -18,7 +25,7 @@ export default class SingleTogglesContainer extends Component<SingleTogglesConta
                     <SingleToggle
                         key={index}
                         answerPair={answerPair}
-                        activeIndex={0}
+                        activeIndex={this.state.activeIndices[index]}
                         onAnswerClick={() => {
                         }}/>
                     )}
