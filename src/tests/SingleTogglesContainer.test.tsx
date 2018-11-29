@@ -19,6 +19,7 @@ describe("SingleToggle", () => {
         activeAnswerIndices[singleToggleIndex] = selectedAnswerIndex;
         singleTogglesContainer.setProps({activeAnswerIndices: activeAnswerIndices});
     };
+
     let props = {answerPairs: answerPairs, activeAnswerIndices: activeAnswerIndices, onAnswerClick: onAnswerClick};
     singleTogglesContainer = mount(<SingleTogglesContainer {...props} />);
 
