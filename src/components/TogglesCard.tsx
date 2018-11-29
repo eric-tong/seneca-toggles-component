@@ -36,7 +36,11 @@ export default class TogglesCard extends Component<TogglesCardProps, TogglesCard
         return this.props.toggleQuestion.options.map(toAnswerPair);
     };
 
-    onAnswerClick = () => {
-
+    onAnswerClick = (singleToggleIndex: number, selectedAnswerIndex: 0 | 1) => {
+        this.setState(prevState => {
+            let activeAnswerIndices = prevState.activeAnswerIndices;
+            activeAnswerIndices[singleToggleIndex] = selectedAnswerIndex;
+            return {activeAnswerIndices: activeAnswerIndices};
+        })
     };
 }
