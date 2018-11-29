@@ -57,6 +57,19 @@ describe("SingleToggle", () => {
         expect(actual).toEqual(expected);
     });
 
+    it("Clicking on active answer does not switch active index", () => {
+        const activeIndices: (0 | 1)[] = [0, 0, 0, 0];
+        singleTogglesContainer.setState({activeIndices: activeIndices});
+        const singleToggleAnswerDivs = singleTogglesContainer.find(".answer");
+        singleToggleAnswerDivs.at(0).simulate("click");
+        singleToggleAnswerDivs.at(4).simulate("click");
+
+        let actual = singleTogglesContainer.state().activeIndices;
+        let expected = [0, 0, 0, 0];
+
+        expect(actual).toEqual(expected);
+    });
+
     it("Clicking on inactive answer switches active index", () => {
         const activeIndices: (0 | 1)[] = [0, 0, 0, 0];
         singleTogglesContainer.setState({activeIndices: activeIndices});
