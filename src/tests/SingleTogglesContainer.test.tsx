@@ -6,7 +6,7 @@ import SingleTogglesContainer, {
     SingleTogglesContainerState
 } from "../components/SingleTogglesContainer";
 
-const answers: [string, string][] = [
+const answerPairs: [string, string][] = [
     ["Answer 1-1", "Answer 1-2"],
     ["Answer 2-1", "Answer 2-2"],
     ["Answer 3-1", "Answer 3-2"],
@@ -15,7 +15,7 @@ const answers: [string, string][] = [
 
 configure({adapter: new Adapter()});
 describe("SingleToggle", () => {
-    let props = {answerPairs: answers};
+    let props = {answerPairs: answerPairs};
     let singleTogglesContainer: ReactWrapper<SingleTogglesContainerProps, SingleTogglesContainerState, SingleTogglesContainer> = mount(
         <SingleTogglesContainer {...props} />);
 
@@ -27,7 +27,7 @@ describe("SingleToggle", () => {
         const singleToggleDivs = singleTogglesContainer.find(".single-toggle");
 
         const actual = singleToggleDivs.length;
-        const expected = answers.length;
+        const expected = answerPairs.length;
 
         expect(actual).toEqual(expected);
     });
@@ -43,7 +43,7 @@ describe("SingleToggle", () => {
             ];
         });
 
-        expect(actual).toEqual(answers);
+        expect(actual).toEqual(answerPairs);
     });
 
     it("Activates answers based on active indices", () => {
@@ -52,7 +52,7 @@ describe("SingleToggle", () => {
         const singleToggleAnswerDivs = singleTogglesContainer.find(".active");
 
         let actual = singleToggleAnswerDivs.map(singleToggleAnswerDiv => singleToggleAnswerDiv.text());
-        let expected = answers.map((answer, index) => answer[activeIndices[index]]);
+        let expected = answerPairs.map((answer, index) => answer[activeIndices[index]]);
 
         expect(actual).toEqual(expected);
     });

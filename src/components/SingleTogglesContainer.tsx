@@ -13,8 +13,9 @@ export interface SingleTogglesContainerState {
 export default class SingleTogglesContainer extends Component<SingleTogglesContainerProps, SingleTogglesContainerState> {
     constructor(props: SingleTogglesContainerProps) {
         super(props);
+        let toZero: () => 0 | 1 = () => 0;
         this.state = {
-            activeIndices: []
+            activeIndices: new Array(this.props.answerPairs.length).map(toZero)
         };
     }
 
