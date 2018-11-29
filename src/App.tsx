@@ -1,15 +1,12 @@
 import React, {Component} from 'react';
 import "./styles/base-styles.css";
 import TogglesCard from "./components/TogglesCard";
-import ToggleQuestion from "./models/ToggleQuestion";
-import ToggleOption from "./models/ToggleOption";
+import {demoToggleQuestion} from "./demo/demoToggleQuestion";
 
-class App extends Component {
+export default class App extends Component {
     render() {
         return (
-            <TogglesCard toggleQuestion={new ToggleQuestion("", new ToggleOption("", ""))}/>
+            <TogglesCard toggleQuestion={demoToggleQuestion}/>
         );
     }
 }
-
-export default App;
