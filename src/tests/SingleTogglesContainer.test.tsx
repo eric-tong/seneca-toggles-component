@@ -61,6 +61,7 @@ describe("SingleToggle", () => {
         const activeIndices: (0 | 1)[] = [0, 0, 0, 0];
         singleTogglesContainer.setState({activeAnswerIndices: activeIndices});
         const singleToggleAnswerDivs = singleTogglesContainer.find(".answer");
+
         singleToggleAnswerDivs.at(0).simulate("click");
         singleToggleAnswerDivs.at(4).simulate("click");
 
@@ -74,6 +75,7 @@ describe("SingleToggle", () => {
         const activeIndices: (0 | 1)[] = [0, 0, 0, 0];
         singleTogglesContainer.setState({activeAnswerIndices: activeIndices});
         const singleToggleAnswerDivs = singleTogglesContainer.find(".answer");
+
         singleToggleAnswerDivs.at(1).simulate("click");
         singleToggleAnswerDivs.at(5).simulate("click");
 
