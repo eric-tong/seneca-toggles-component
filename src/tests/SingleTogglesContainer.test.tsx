@@ -40,14 +40,12 @@ describe("SingleToggle", () => {
     it("Contains toggles with content equals to answer pairs", () => {
         const singleToggleDivs = singleTogglesContainer.find(".single-toggle");
 
-        let actual: [string, string][] = [];
-        singleToggleDivs.forEach(singleToggleDiv => {
+        let actual = singleToggleDivs.map(singleToggleDiv => {
             let singleToggleAnswerDivs = singleToggleDiv.find(".answer");
-            let answerPair: [string, string] = [
+            return [
                 singleToggleAnswerDivs.at(0).text(),
                 singleToggleAnswerDivs.at(1).text()
             ];
-            actual.push(answerPair);
         });
 
         expect(actual).toEqual(answers);
