@@ -4,21 +4,11 @@ import SingleToggle from "./SingleToggle";
 
 export interface SingleTogglesContainerProps {
     answerPairs: [string, string][];
-}
-
-export interface SingleTogglesContainerState {
     activeAnswerIndices: (0 | 1)[];
+    onAnswerClick: (singleToggleIndex: number, selectedAnswerIndex: 0 | 1) => void;
 }
 
-export default class SingleTogglesContainer extends Component<SingleTogglesContainerProps, SingleTogglesContainerState> {
-    constructor(props: SingleTogglesContainerProps) {
-        super(props);
-        let defaultActiveAnswerIndices: (0 | 1)[] = Array.apply(null, new Array(10)).map(Number.prototype.valueOf, 1);
-        this.state = {
-            activeAnswerIndices: defaultActiveAnswerIndices
-        };
-    }
-
+export default class SingleTogglesContainer extends Component<SingleTogglesContainerProps> {
     render() {
         return (
             <div>
@@ -26,18 +16,10 @@ export default class SingleTogglesContainer extends Component<SingleTogglesConta
                     <SingleToggle
                         key={singleToggleIndex}
                         answerPair={answerPair}
-                        activeIndex={this.state.activeAnswerIndices[singleToggleIndex]}
-                        onAnswerClick={(activeAnswerIndex) => this.onAnswerClick(singleToggleIndex, activeAnswerIndex)}/>
+                        activeIndex={this.props.activeAnswerIndices[singleToggleIndex]}
+                        onAnswerClick={(selectedAnswerIndex) => this.props.onAnswerClick(singleToggleIndex, selectedAnswerIndex)}/>
                 )}
             </div>
         );
     }
-
-    onAnswerClick = (singleToggleIndex: number, activeAnswerIndex: 0 | 1) => {
-        this.setState(prevState => {
-            let activeAnswerIndices = prevState.activeAnswerIndices;
-            activeAnswerIndices[singleToggleIndex] = activeAnswerIndex;
-            return {activeAnswerIndices: activeAnswerIndices};
-        });
-    };
 }
