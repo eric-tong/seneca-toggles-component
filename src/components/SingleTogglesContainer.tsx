@@ -6,7 +6,11 @@ export interface SingleTogglesContainerProps {
     answerPairs: [string, string][];
 }
 
-export default class SingleTogglesContainer extends Component<SingleTogglesContainerProps, {}> {
+export interface SingleTogglesContainerState {
+    activeIndices: (0 | 1)[];
+}
+
+export default class SingleTogglesContainer extends Component<SingleTogglesContainerProps, SingleTogglesContainerState> {
     render() {
         return (
             <div>

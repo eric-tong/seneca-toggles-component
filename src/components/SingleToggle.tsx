@@ -8,7 +8,7 @@ export interface SingleToggleProps {
     onAnswerClick: (activeIndex: 0 | 1) => void;
 }
 
-export default class SingleToggle extends Component<SingleToggleProps, {}> {
+export default class SingleToggle extends Component<SingleToggleProps> {
     constructor(props: SingleToggleProps) {
         super(props);
         this.state = {
