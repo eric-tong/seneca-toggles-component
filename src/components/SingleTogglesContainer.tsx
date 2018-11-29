@@ -15,7 +15,7 @@ export default class SingleTogglesContainer extends Component<SingleTogglesConta
                         key={index}
                         answerPair={answerPair}
                         activeIndex={0}
-                        onActiveIndexChange={() => {
+                        onAnswerClick={() => {
                         }}/>
                     )}
             </div>

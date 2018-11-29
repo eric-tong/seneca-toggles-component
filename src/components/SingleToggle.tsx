@@ -5,7 +5,7 @@ import SingleToggleAnswer from "./SingleToggleAnswer";
 export interface SingleToggleProps {
     answerPair: [string, string];
     activeIndex: 0 | 1;
-    onActiveIndexChange: (activeIndex: 0 | 1) => void;
+    onAnswerClick: (activeIndex: 0 | 1) => void;
 }
 
 export default class SingleToggle extends Component<SingleToggleProps, {}> {
@@ -24,7 +24,7 @@ export default class SingleToggle extends Component<SingleToggleProps, {}> {
                         key={index}
                         content={answer}
                         isActive={index == this.props.activeIndex}
-                        onClick={() => this.props.onActiveIndexChange(index ? 1 : 0)}
+                        onClick={() => this.props.onAnswerClick(index ? 1 : 0)}
                     />
                 )}
             </div>

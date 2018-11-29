@@ -18,7 +18,7 @@ describe("SingleToggle", () => {
         props = {
             answerPair: [leftAnswer, rightAnswer],
             activeIndex: 0,
-            onActiveIndexChange: setActiveState
+            onAnswerClick: setActiveState
         };
         singleToggle = mount(
             <SingleToggle {...props} />
