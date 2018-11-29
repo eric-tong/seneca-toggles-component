@@ -1,7 +1,10 @@
 import React from 'react';
-import {configure, mount} from "enzyme";
+import {configure, mount, ReactWrapper} from "enzyme";
 import Adapter from 'enzyme-adapter-react-16';
-import SingleTogglesContainer from "../components/SingleTogglesContainer";
+import SingleTogglesContainer, {
+    SingleTogglesContainerProps,
+    SingleTogglesContainerState
+} from "../components/SingleTogglesContainer";
 
 const answers: [string, string][] = [
     ["Answer 1-1", "Answer 1-2"],
@@ -13,7 +16,8 @@ const answers: [string, string][] = [
 configure({adapter: new Adapter()});
 describe("SingleToggle", () => {
     let props = {answerPairs: answers};
-    let singleTogglesContainer = mount(<SingleTogglesContainer {...props} />);
+    let singleTogglesContainer: ReactWrapper<SingleTogglesContainerProps, SingleTogglesContainerState, SingleTogglesContainer> = mount(
+        <SingleTogglesContainer {...props} />);
 
     beforeEach(() => {
         singleTogglesContainer.setProps(props);
@@ -53,13 +57,15 @@ describe("SingleToggle", () => {
         expect(actual).toEqual(expected);
     });
 
-    it("Activates answers based on active indices", () => {
-        const activeIndices: (0 | 1)[] = [0, 1, 0, 1];
+    it("Clicking on inactive answer switches active index", () => {
+        const activeIndices: (0 | 1)[] = [0, 0, 0, 0];
         singleTogglesContainer.setState({activeIndices: activeIndices});
-        const singleToggleAnswerDivs = singleTogglesContainer.find(".active");
+        const singleToggleAnswerDivs = singleTogglesContainer.find(".answer");
+        singleToggleAnswerDivs.at(1).simulate("click");
+        singleToggleAnswerDivs.at(5).simulate("click");
 
-        let actual = singleToggleAnswerDivs.map(singleToggleAnswerDiv => singleToggleAnswerDiv.text());
-        let expected = answers.map((answer, index) => answer[activeIndices[index]]);
+        let actual = singleTogglesContainer.state().activeIndices;
+        let expected = [1, 0, 1, 0];
 
         expect(actual).toEqual(expected);
     });
