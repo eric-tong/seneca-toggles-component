@@ -12,7 +12,7 @@ const answerPairs: [string, string][] = [
 const activeAnswerIndices: (0 | 1)[] = [0, 1, 0, 1];
 
 configure({adapter: new Adapter()});
-describe("SingleToggle", () => {
+describe("SingleTogglesContainer", () => {
     let singleTogglesContainer: ReactWrapper<SingleTogglesContainerProps, {}, SingleTogglesContainer>;
     let onAnswerClick = (singleToggleIndex: number, selectedAnswerIndex: 0 | 1) => {
         let activeAnswerIndices = singleTogglesContainer.prop("activeAnswerIndices");

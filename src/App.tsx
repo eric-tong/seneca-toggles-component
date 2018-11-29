@@ -7,7 +7,7 @@ import ToggleOption from "./models/ToggleOption";
 class App extends Component {
     render() {
         return (
-            <TogglesCard toggleQuestion={new ToggleQuestion("", [new ToggleOption("", "")])}/>
+            <TogglesCard toggleQuestion={new ToggleQuestion("", new ToggleOption("", ""))}/>
         );
     }
 }
