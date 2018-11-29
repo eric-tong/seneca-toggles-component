@@ -22,10 +22,13 @@ export default class TogglesCard extends Component<TogglesCardProps, TogglesCard
 
     render() {
         return (
-            <SingleTogglesContainer
-                answerPairs={this.getAnswerPairs()}
-                activeAnswerIndices={this.state.activeAnswerIndices}
-                onAnswerClick={this.onAnswerClick}/>
+            <div className="toggles-card">
+                <div className="statement">{this.props.toggleQuestion.statement}</div>
+                <SingleTogglesContainer
+                    answerPairs={this.getAnswerPairs()}
+                    activeAnswerIndices={this.state.activeAnswerIndices}
+                    onAnswerClick={this.onAnswerClick}/>
+            </div>
         );
     }
 
@@ -41,6 +44,6 @@ export default class TogglesCard extends Component<TogglesCardProps, TogglesCard
             let activeAnswerIndices = prevState.activeAnswerIndices;
             activeAnswerIndices[singleToggleIndex] = selectedAnswerIndex;
             return {activeAnswerIndices: activeAnswerIndices};
-        })
+        });
     };
 }
