@@ -15,21 +15,28 @@ export default class SingleTogglesContainer extends Component<SingleTogglesConta
         super(props);
         this.state = {
             activeIndices: []
-        }
+        };
     }
 
     render() {
         return (
             <div>
-                {this.props.answerPairs.map((answerPair, index) =>
+                {this.props.answerPairs.map((answerPair, singleToggleIndex) =>
                     <SingleToggle
-                        key={index}
+                        key={singleToggleIndex}
                         answerPair={answerPair}
-                        activeIndex={this.state.activeIndices[index]}
-                        onAnswerClick={() => {
-                        }}/>
-                    )}
+                        activeIndex={this.state.activeIndices[singleToggleIndex]}
+                        onAnswerClick={(activeAnswerIndex) => this.onAnswerClick(singleToggleIndex, activeAnswerIndex)}/>
+                )}
             </div>
         );
     }
+
+    onAnswerClick = (singleToggleIndex: number, activeAnswerIndex: 0 | 1) => {
+        this.setState(prevState => {
+            let activeIndices = prevState.activeIndices;
+            activeIndices[singleToggleIndex] = activeAnswerIndex;
+            return {activeIndices: activeIndices};
+        });
+    };
 }
