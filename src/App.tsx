@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import "./styles/base-styles.css";
 import TogglesCard from "./components/TogglesCard";
-import {demoToggleQuestion} from "./demo/demoToggleQuestion";
+import {demoToggleQuestion} from "./demo/DemoToggleQuestion";
 
 export default class App extends Component {
     render() {

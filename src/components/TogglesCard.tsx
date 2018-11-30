@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import SingleTogglesContainer from "./SingleTogglesContainer";
 import ToggleQuestion from "../models/ToggleQuestion";
 import ToggleOption from "../models/ToggleOption";
+import {allCorrectResultMessage, incorrectResultMessage} from "../constants/Strings";
 
 export interface TogglesCardProps {
     toggleQuestion: ToggleQuestion;
@@ -25,6 +26,7 @@ export default class TogglesCard extends Component<TogglesCardProps, TogglesCard
                     answerPairs={this.answerPairs}
                     activeAnswerIndices={this.state.activeAnswerIndices}
                     onAnswerClick={this.onAnswerClick}/>
+                <div className="result">{this.isAllCorrect ? allCorrectResultMessage : incorrectResultMessage}</div>
             </div>
         );
     }
@@ -41,6 +43,10 @@ export default class TogglesCard extends Component<TogglesCardProps, TogglesCard
         let toAnswerPair = (option: ToggleOption) => option.answerPair;
         return this.props.toggleQuestion.options.map(toAnswerPair);
     };
+
+    get isAllCorrect() {
+        return this.currentScore == this.props.toggleQuestion.options.length;
+    }
 
     get currentScore() {
         return this.state.activeAnswerIndices.filter(this.isCorrect).length;
