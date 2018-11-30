@@ -1,10 +1,12 @@
 //region Variables
 //==============================================
 $greyShadowColor: rgba(167, 196, 220, 0.5);
+$lightRedCardBackgroundColor: hsla(19deg, 93.9%, 68%, 0.7);
+$darkRedCardBackgroundColor: hsla(8deg, 93.2%, 53.9%, 0.69);
 $redShadowColor: hsla(11deg, 58.5%, 48.2%, 0.4);
 $redFontColor: hsl(11deg, 75.8%, 59.4%);
-$sliderColor: hsla(0,0%,97.6%,.5);
-$borderColor: #FBFBFB;
+$sliderBackgroundColor: hsla(0, 0%, 97.6%, .5);
+$singleToggleBorderColor: #FBFBFB;
 
 $defaultFontSize: 14px;
 $singleToggleHeight: 3.5rem;
@@ -19,6 +21,7 @@ html {
   font-size: $defaultFontSize;
   font-family: "Muli", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
+
 //==============================================
 //endregion
 
@@ -31,6 +34,7 @@ html {
   -o-transition: $args;
   transition: $args;
 }
+
 //==============================================
 //endregion
 
@@ -46,7 +50,7 @@ html {
   color: white;
   border-radius: 0.5rem;
   box-shadow: 0 0.25rem 1rem 0.5rem $greyShadowColor;
-  background-color: white;
+  background: white linear-gradient(to bottom, $lightRedCardBackgroundColor, $darkRedCardBackgroundColor);
 
   p {
     text-align: center;
@@ -67,7 +71,7 @@ html {
         width: 50%;
         height: 100%;
         border-radius: $singleToggleHeight / 2;
-        background: $sliderColor;
+        background: $sliderBackgroundColor;
         box-shadow: 0 0 6px 1px $redShadowColor;
 
         &.left {
@@ -86,7 +90,7 @@ html {
         display: flex;
         align-items: center;
         align-content: center;
-        border: 1px solid $borderColor;
+        border: 1px solid $singleToggleBorderColor;
         border-radius: $singleToggleHeight / 2;
         box-sizing: border-box;
         cursor: pointer;
@@ -105,5 +109,6 @@ html {
     }
   }
 }
+
 //==============================================
 //endregion
