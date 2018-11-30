@@ -20,12 +20,12 @@ export default class TogglesCard extends Component<TogglesCardProps, TogglesCard
     render() {
         return (
             <div className="toggles-card">
-                <div className="statement">{this.props.toggleQuestion.statement}</div>
+                <p className="statement">{this.props.toggleQuestion.statement}</p>
                 <SingleTogglesContainer
                     answerPairs={this.props.toggleQuestion.answerPairs}
                     activeAnswerIndices={this.state.activeAnswerIndices}
                     onAnswerClick={this.onAnswerClick}/>
-                <div className="result">{this.isAllCorrect ? allCorrectResultMessage : incorrectResultMessage}</div>
+                <p className="result">{this.isAllCorrect ? allCorrectResultMessage : incorrectResultMessage}</p>
             </div>
         );
     }
