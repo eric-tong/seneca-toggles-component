@@ -5,6 +5,7 @@ import ToggleOption from "../models/ToggleOption";
 
 export interface TogglesCardProps {
     toggleQuestion: ToggleQuestion;
+    defaultActiveAnswerIndices?: (0 | 1)[];
 }
 
 export interface TogglesCardState {
@@ -29,6 +30,10 @@ export default class TogglesCard extends Component<TogglesCardProps, TogglesCard
     }
 
     get defaultActiveAnswerIndices() {
+        return this.props.defaultActiveAnswerIndices ? this.props.defaultActiveAnswerIndices : this.incorrectAnswerIndices;
+    }
+
+    get incorrectAnswerIndices() {
         return this.props.toggleQuestion.options.map(option => option.correctAnswerIndex ? 0 : 1);
     }
 
@@ -41,7 +46,7 @@ export default class TogglesCard extends Component<TogglesCardProps, TogglesCard
         return this.state.activeAnswerIndices.filter(this.isCorrect).length;
     }
 
-    isCorrect = (activeAnswerIndex: 0|1, index: number) =>
+    isCorrect = (activeAnswerIndex: 0 | 1, index: number) =>
         activeAnswerIndex == this.props.toggleQuestion.options[index].correctAnswerIndex;
 
     onAnswerClick = (singleToggleIndex: number, selectedAnswerIndex: 0 | 1) => {
