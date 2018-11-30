@@ -38,14 +38,11 @@ export default class TogglesCard extends Component<TogglesCardProps, TogglesCard
     };
 
     get currentScore() {
-        let score = 0;
-        for (let i = 0; i < this.props.toggleQuestion.options.length; i++) {
-            if (this.props.toggleQuestion.options[i].correctAnswerIndex == this.state.activeAnswerIndices[i]) {
-                score++;
-            }
-        }
-        return score;
+        return this.state.activeAnswerIndices.filter(this.isCorrect).length;
     }
+
+    isCorrect = (activeAnswerIndex: 0|1, index: number) =>
+        activeAnswerIndex == this.props.toggleQuestion.options[index].correctAnswerIndex;
 
     onAnswerClick = (singleToggleIndex: number, selectedAnswerIndex: 0 | 1) => {
         this.setState(prevState => {
