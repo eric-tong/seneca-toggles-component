@@ -12,12 +12,9 @@ export interface TogglesCardState {
 }
 
 export default class TogglesCard extends Component<TogglesCardProps, TogglesCardState> {
-    constructor(props: TogglesCardProps) {
-        super(props);
-        this.state = {
-            activeAnswerIndices: this.defaultActiveAnswerIndices
-        };
-    }
+    state = {
+        activeAnswerIndices: this.defaultActiveAnswerIndices
+    };
 
     render() {
         return (

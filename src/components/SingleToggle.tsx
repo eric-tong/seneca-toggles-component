@@ -8,13 +8,6 @@ export interface SingleToggleProps {
 }
 
 export default class SingleToggle extends Component<SingleToggleProps> {
-    constructor(props: SingleToggleProps) {
-        super(props);
-        this.state = {
-            activeIndex: 0
-        };
-    }
-
     render() {
         return (
             <div className="single-toggle">
