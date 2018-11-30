@@ -14,9 +14,8 @@ export interface TogglesCardState {
 export default class TogglesCard extends Component<TogglesCardProps, TogglesCardState> {
     constructor(props: TogglesCardProps) {
         super(props);
-        let defaultActiveAnswerIndices: (0 | 1)[] = Array.apply(null, new Array(this.props.toggleQuestion.options.length)).map(Number.prototype.valueOf, 1);
         this.state = {
-            activeAnswerIndices: defaultActiveAnswerIndices
+            activeAnswerIndices: this.defaultActiveAnswerIndices
         };
     }
 
@@ -30,6 +29,10 @@ export default class TogglesCard extends Component<TogglesCardProps, TogglesCard
                     onAnswerClick={this.onAnswerClick}/>
             </div>
         );
+    }
+
+    get defaultActiveAnswerIndices() {
+        return this.props.toggleQuestion.options.map(option => option.correctAnswerIndex ? 0 : 1);
     }
 
     get answerPairs() {
