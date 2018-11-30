@@ -22,6 +22,7 @@ export default class TogglesCard extends Component<TogglesCardProps, TogglesCard
         const currentScore = this.currentScore;
         const percentageScore = currentScore / this.props.toggleQuestion.options.length;
         const isAllCorrect = currentScore == this.props.toggleQuestion.options.length;
+
         const togglesCardStyle = getTogglesCardStyle(percentageScore);
 
         return (
