@@ -1,4 +1,6 @@
-$shadowColor: rgba(167, 196, 220, 0.5);
+$greyShadowColor: rgba(167, 196, 220, 0.5);
+$redShadowColor: rgba(195, 51, 51, 0.5);
+$sliderColor: hsla(0,0%,97.6%,.5);
 $borderColor: #FBFBFB;
 $redFontColor: #E66549;
 $defaultFontSize: 14px;
@@ -20,32 +22,56 @@ html {
   padding: 4rem 2rem;
   color: white;
   border-radius: 0.5rem;
-  box-shadow: 0 0.25rem 1rem 0.5rem $shadowColor;
+  box-shadow: 0 0.25rem 1rem 0.5rem $greyShadowColor;
   background: white linear-gradient(to bottom, rgba(250, 145, 97, 0.7), rgba(247, 59, 28, 0.69));
 
   .single-toggles-container {
     margin: 4rem 0;
 
-    .single-toggle{
-      display: flex;
-      align-items: center;
-      align-content: center;
+    .single-toggle-wrapper {
+      position: relative;
       height: $singleToggleHeight;
-      border: 1px solid $borderColor;
-      border-radius: $singleToggleHeight / 2;
       margin: 0.75rem 0;
 
-      .answer {
-        cursor: pointer;
-        text-align: center;
-        padding: 0 $singleToggleHeight / 2;
-        flex-grow: 1;
+      .slider {
+        position: absolute;
+        top: 0;
+        width: 50%;
+        height: $singleToggleHeight;
+        border-radius: $singleToggleHeight / 2;
+        background: $sliderColor;
+        box-shadow: 0 0 6px 1px $redShadowColor;
 
-        &.active {
-          color: $redFontColor;
+        &.left {
+          left: 0;
+        }
+
+        &.right {
+          left: 50%;
+        }
+      }
+
+      .single-toggle {
+        position: relative;
+        height: $singleToggleHeight;
+        display: flex;
+        align-items: center;
+        align-content: center;
+        border: 1px solid $borderColor;
+        border-radius: $singleToggleHeight / 2;
+        box-sizing: border-box;
+
+        .answer {
+          width: 50%;
+          cursor: pointer;
+          text-align: center;
+          padding: 0 $singleToggleHeight / 2;
+
+          &.active {
+            color: $redFontColor;
+          }
         }
       }
     }
-
   }
 }
