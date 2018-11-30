@@ -9,13 +9,13 @@ export interface SingleToggleProps {
 export default class SingleToggleAnswer extends Component<SingleToggleProps> {
     render() {
         return (
-            <div className={this.getClassNames()} onClick={this.props.onClick}>
+            <div className={this.classNames} onClick={this.props.onClick}>
                 {this.props.content}
             </div>
         );
     }
 
-    getClassNames = () => {
+    get classNames() {
         let className = "answer";
         if (this.props.isActive) {
             className += " active";
