@@ -10,7 +10,7 @@ export interface SingleTogglesContainerProps {
 export default class SingleTogglesContainer extends Component<SingleTogglesContainerProps> {
     render() {
         return (
-            <div>
+            <div className="single-toggles-container">
                 {this.props.answerPairs.map((answerPair, singleToggleIndex) =>
                     <SingleToggle
                         key={singleToggleIndex}
