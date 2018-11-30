@@ -14,13 +14,13 @@ const activeAnswerIndices: (0 | 1)[] = [0, 1, 0, 1];
 configure({adapter: new Adapter()});
 describe("SingleTogglesContainer", () => {
     let singleTogglesContainer: ReactWrapper<SingleTogglesContainerProps, {}, SingleTogglesContainer>;
-    let onAnswerClick = (singleToggleIndex: number, selectedAnswerIndex: 0 | 1) => {
+    let onSingleToggleClick = (singleToggleIndex: number) => {
         let activeAnswerIndices = singleTogglesContainer.prop("activeAnswerIndices");
-        activeAnswerIndices[singleToggleIndex] = selectedAnswerIndex;
+        activeAnswerIndices[singleToggleIndex] = activeAnswerIndices[singleToggleIndex] ? 0 : 1;
         singleTogglesContainer.setProps({activeAnswerIndices: activeAnswerIndices});
     };
 
-    let props = {answerPairs: answerPairs, activeAnswerIndices: activeAnswerIndices, onAnswerClick: onAnswerClick};
+    let props: SingleTogglesContainerProps = {answerPairs: answerPairs, activeAnswerIndices: activeAnswerIndices, onSingleToggleClick: onSingleToggleClick};
     singleTogglesContainer = mount(<SingleTogglesContainer {...props} />);
 
     beforeEach(() => {
@@ -61,27 +61,13 @@ describe("SingleTogglesContainer", () => {
         expect(actual).toEqual(expected);
     });
 
-    it("Clicking on active answer does not switch active index", () => {
+    it("Clicking on single toggle switches active index", () => {
         const activeAnswerIndices: (0 | 1)[] = [0, 0, 0, 0];
         singleTogglesContainer.setProps({activeAnswerIndices: activeAnswerIndices});
-        const singleToggleAnswerDivs = singleTogglesContainer.find(".answer");
+        const singleToggleAnswerDivs = singleTogglesContainer.find(".single-toggle");
 
         singleToggleAnswerDivs.at(0).simulate("click");
-        singleToggleAnswerDivs.at(4).simulate("click");
-
-        let actual = singleTogglesContainer.prop("activeAnswerIndices");
-        let expected = [0, 0, 0, 0];
-
-        expect(actual).toEqual(expected);
-    });
-
-    it("Clicking on inactive answer switches active index", () => {
-        const activeAnswerIndices: (0 | 1)[] = [0, 0, 0, 0];
-        singleTogglesContainer.setProps({activeAnswerIndices: activeAnswerIndices});
-        const singleToggleAnswerDivs = singleTogglesContainer.find(".answer");
-
-        singleToggleAnswerDivs.at(1).simulate("click");
-        singleToggleAnswerDivs.at(5).simulate("click");
+        singleToggleAnswerDivs.at(2).simulate("click");
 
         let actual = singleTogglesContainer.prop("activeAnswerIndices");
         let expected = [1, 0, 1, 0];

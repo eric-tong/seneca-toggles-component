@@ -33,27 +33,13 @@ describe("TogglesCard", () => {
         expect(actual).toEqual(expected);
     });
 
-    it("Does not switch active index on clicking active index", () => {
+    it("Switches active index on clicking single toggle", () => {
         const activeAnswerIndices: (0 | 1)[] = [0, 0, 0, 0];
         togglesCard.setState({activeAnswerIndices: activeAnswerIndices});
-        const singleToggleAnswerDivs = togglesCard.find(".answer");
+        const singleToggleAnswerDivs = togglesCard.find(".single-toggle");
 
         singleToggleAnswerDivs.at(0).simulate("click");
-        singleToggleAnswerDivs.at(4).simulate("click");
-
-        let actual = togglesCard.state("activeAnswerIndices");
-        let expected = [0, 0, 0, 0];
-
-        expect(actual).toEqual(expected);
-    });
-
-    it("Switches active index on clicking inactive index", () => {
-        const activeAnswerIndices: (0 | 1)[] = [0, 0, 0, 0];
-        togglesCard.setState({activeAnswerIndices: activeAnswerIndices});
-        const singleToggleAnswerDivs = togglesCard.find(".answer");
-
-        singleToggleAnswerDivs.at(1).simulate("click");
-        singleToggleAnswerDivs.at(5).simulate("click");
+        singleToggleAnswerDivs.at(2).simulate("click");
 
         let actual = togglesCard.state("activeAnswerIndices");
         let expected = [1, 0, 1, 0];
