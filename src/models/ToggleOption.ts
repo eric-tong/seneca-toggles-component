@@ -1,9 +1,9 @@
 export default class ToggleOption {
-    correctAnswer: string;
-    incorrectAnswer: string;
+    answerPair: [string, string];
+    correctAnswerIndex: 0 | 1;
 
-    constructor(correctAnswer: string, incorrectAnswer: string) {
-        this.correctAnswer = correctAnswer;
-        this.incorrectAnswer = incorrectAnswer;
+    constructor(leftAnswer: string, rightAnswer: string, correctAnswerIndex: 0 | 1) {
+        this.answerPair = [leftAnswer, rightAnswer];
+        this.correctAnswerIndex = correctAnswerIndex;
     }
 }

@@ -33,9 +33,7 @@ export default class TogglesCard extends Component<TogglesCardProps, TogglesCard
     }
 
     getAnswerPairs: () => [string, string][] = () => {
-        let toAnswerPair: (option: ToggleOption) => [string, string] = option => {
-            return [option.correctAnswer, option.incorrectAnswer];
-        };
+        let toAnswerPair = (option: ToggleOption) => option.answerPair;
         return this.props.toggleQuestion.options.map(toAnswerPair);
     };
 
