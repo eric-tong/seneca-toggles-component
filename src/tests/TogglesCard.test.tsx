@@ -66,7 +66,7 @@ describe("TogglesCard", () => {
         togglesCard.setState({activeAnswerIndices: activeAnswerIndices});
 
         let actual = togglesCard.instance().currentScore;
-        let expected = 0.5;
+        let expected = 2;
 
         expect(actual).toEqual(expected);
     });

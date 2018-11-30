@@ -16,7 +16,7 @@ export default class TogglesCard extends Component<TogglesCardProps, TogglesCard
         super(props);
         let defaultActiveAnswerIndices: (0 | 1)[] = Array.apply(null, new Array(this.props.toggleQuestion.options.length)).map(Number.prototype.valueOf, 1);
         this.state = {
-            activeAnswerIndices: defaultActiveAnswerIndices,
+            activeAnswerIndices: defaultActiveAnswerIndices
         };
     }
 
@@ -38,7 +38,13 @@ export default class TogglesCard extends Component<TogglesCardProps, TogglesCard
     };
 
     get currentScore() {
-        return 0;
+        let score = 0;
+        for (let i = 0; i < this.props.toggleQuestion.options.length; i++) {
+            if (this.props.toggleQuestion.options[i].correctAnswerIndex == this.state.activeAnswerIndices[i]) {
+                score++;
+            }
+        }
+        return score;
     }
 
     onAnswerClick = (singleToggleIndex: number, selectedAnswerIndex: 0 | 1) => {
