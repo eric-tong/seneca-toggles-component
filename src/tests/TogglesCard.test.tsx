@@ -1,15 +1,15 @@
 import React from 'react';
-import {configure, mount} from "enzyme";
+import {configure, mount, ReactWrapper} from "enzyme";
 import Adapter from 'enzyme-adapter-react-16';
 import TogglesCard, {TogglesCardProps, TogglesCardState} from "../components/TogglesCard";
 import ToggleQuestion from "../models/ToggleQuestion";
 import ToggleOption from "../models/ToggleOption";
 
 const toggleQuestion = new ToggleQuestion("Question statement",
-    new ToggleOption("Answer 1-1", "Answer 1-2"),
-    new ToggleOption("Answer 2-1", "Answer 2-2"),
-    new ToggleOption("Answer 3-1", "Answer 3-2"),
-    new ToggleOption("Answer 4-1", "Answer 4-2")
+    new ToggleOption("Answer 1-1", "Answer 1-2", 0),
+    new ToggleOption("Answer 2-1", "Answer 2-2", 0),
+    new ToggleOption("Answer 3-1", "Answer 3-2", 1),
+    new ToggleOption("Answer 4-1", "Answer 4-2", 1)
 );
 const activeAnswersIndices: (0 | 1)[] = [0, 0, 0, 0];
 
@@ -17,7 +17,7 @@ configure({adapter: new Adapter()});
 describe("TogglesCard", () => {
     let props: TogglesCardProps = {toggleQuestion: toggleQuestion};
     let state: TogglesCardState = {activeAnswerIndices: activeAnswersIndices};
-    let togglesCard = mount(<TogglesCard {...props} />);
+    let togglesCard: ReactWrapper<TogglesCardProps, TogglesCardState, TogglesCard> = mount(<TogglesCard {...props} />);
 
     beforeEach(() => {
         togglesCard.setProps(props);
@@ -33,9 +33,9 @@ describe("TogglesCard", () => {
         expect(actual).toEqual(expected);
     });
 
-    it("Clicking on active answer does not switch active index", () => {
+    it("Does not switch active index on clicking active index", () => {
         const activeAnswerIndices: (0 | 1)[] = [0, 0, 0, 0];
-        togglesCard.setProps({activeAnswerIndices: activeAnswerIndices});
+        togglesCard.setState({activeAnswerIndices: activeAnswerIndices});
         const singleToggleAnswerDivs = togglesCard.find(".answer");
 
         singleToggleAnswerDivs.at(0).simulate("click");
@@ -47,9 +47,9 @@ describe("TogglesCard", () => {
         expect(actual).toEqual(expected);
     });
 
-    it("Clicking on inactive answer switches active index", () => {
+    it("Switches active index on clicking inactive index", () => {
         const activeAnswerIndices: (0 | 1)[] = [0, 0, 0, 0];
-        togglesCard.setProps({activeAnswerIndices: activeAnswerIndices});
+        togglesCard.setState({activeAnswerIndices: activeAnswerIndices});
         const singleToggleAnswerDivs = togglesCard.find(".answer");
 
         singleToggleAnswerDivs.at(1).simulate("click");
@@ -57,6 +57,16 @@ describe("TogglesCard", () => {
 
         let actual = togglesCard.state("activeAnswerIndices");
         let expected = [1, 0, 1, 0];
+
+        expect(actual).toEqual(expected);
+    });
+
+    it("Calculates current score from state", () => {
+        const activeAnswerIndices: (0 | 1)[] = [0, 0, 0, 0];
+        togglesCard.setState({activeAnswerIndices: activeAnswerIndices});
+
+        let actual = togglesCard.instance().currentScore;
+        let expected = 0.5;
 
         expect(actual).toEqual(expected);
     });
