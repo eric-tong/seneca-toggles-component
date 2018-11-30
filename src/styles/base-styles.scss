@@ -54,7 +54,7 @@ html {
     .single-toggle-wrapper {
       position: relative;
       min-height: $singleToggleHeight;
-      margin: 0.75rem 0;
+      margin: 0.5rem 0;
 
       .slider {
         @include transition(left 300ms ease-in-out);
