@@ -1,18 +1,41 @@
+//region Variables
+//==============================================
 $greyShadowColor: rgba(167, 196, 220, 0.5);
 $redShadowColor: rgba(195, 51, 51, 0.5);
 $sliderColor: hsla(0,0%,97.6%,.5);
 $borderColor: #FBFBFB;
 $redFontColor: #E66549;
+
 $defaultFontSize: 14px;
 $singleToggleHeight: 3.5rem;
+//==============================================
+//endregion
 
+//region Header
+//==============================================
 @import url('https://fonts.googleapis.com/css?family=Muli:700');
 
 html {
   font-size: $defaultFontSize;
   font-family: "Muli", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
+//==============================================
+//endregion
 
+//region Header
+//==============================================
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+//==============================================
+//endregion
+
+//region Content
+//==============================================
 .toggles-card {
   display: flex;
   max-width: 50rem;
@@ -30,14 +53,15 @@ html {
 
     .single-toggle-wrapper {
       position: relative;
-      height: $singleToggleHeight;
+      min-height: $singleToggleHeight;
       margin: 0.75rem 0;
 
       .slider {
+        @include transition(left 300ms ease-in-out);
         position: absolute;
         top: 0;
         width: 50%;
-        height: $singleToggleHeight;
+        height: 100%;
         border-radius: $singleToggleHeight / 2;
         background: $sliderColor;
         box-shadow: 0 0 6px 1px $redShadowColor;
@@ -53,7 +77,8 @@ html {
 
       .single-toggle {
         position: relative;
-        height: $singleToggleHeight;
+        min-width: 22rem;
+        min-height: $singleToggleHeight;
         display: flex;
         align-items: center;
         align-content: center;
@@ -62,10 +87,11 @@ html {
         box-sizing: border-box;
 
         .answer {
+          @include transition(color 300ms);
           width: 50%;
           cursor: pointer;
           text-align: center;
-          padding: 0 $singleToggleHeight / 2;
+          padding: 0.25rem $singleToggleHeight / 2;
 
           &.active {
             color: $redFontColor;
@@ -75,3 +101,5 @@ html {
     }
   }
 }
+//==============================================
+//endregion
