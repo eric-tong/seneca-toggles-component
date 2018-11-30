@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import SingleTogglesContainer from "./SingleTogglesContainer";
 import ToggleQuestion from "../models/ToggleQuestion";
 import {allCorrectResultMessage, incorrectResultMessage} from "../constants/Strings";
+import {getTogglesCardStyle} from "../styles/TogglesCardStyles";
 
 export interface TogglesCardProps {
     toggleQuestion: ToggleQuestion;
@@ -18,24 +19,25 @@ export default class TogglesCard extends Component<TogglesCardProps, TogglesCard
     };
 
     render() {
+        const currentScore = this.currentScore;
+        const percentageScore = currentScore / this.props.toggleQuestion.options.length;
+        const isAllCorrect = currentScore == this.props.toggleQuestion.options.length;
+        const togglesCardStyle = getTogglesCardStyle(percentageScore);
+
         return (
-            <div className="toggles-card">
+            <div className="toggles-card" style={togglesCardStyle}>
                 <p className="statement">{this.props.toggleQuestion.statement}</p>
                 <SingleTogglesContainer
                     answerPairs={this.props.toggleQuestion.answerPairs}
                     activeAnswerIndices={this.state.activeAnswerIndices}
                     onSingleToggleClick={this.onAnswerClick}/>
-                <p className="result">{this.isAllCorrect ? allCorrectResultMessage : incorrectResultMessage}</p>
+                <p className="result">{isAllCorrect ? allCorrectResultMessage : incorrectResultMessage}</p>
             </div>
         );
     }
 
     get defaultActiveAnswerIndices() {
         return this.props.defaultActiveAnswerIndices ? this.props.defaultActiveAnswerIndices : this.props.toggleQuestion.incorrectAnswerIndices;
-    }
-
-    get isAllCorrect() {
-        return this.currentScore == this.props.toggleQuestion.options.length;
     }
 
     get currentScore() {
