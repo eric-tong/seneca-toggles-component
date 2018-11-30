@@ -4,7 +4,7 @@ import SingleToggle from "./SingleToggle";
 export interface SingleTogglesContainerProps {
     answerPairs: [string, string][];
     activeAnswerIndices: (0 | 1)[];
-    onAnswerClick: (singleToggleIndex: number, selectedAnswerIndex: 0 | 1) => void;
+    onSingleToggleClick: (singleToggleIndex: number) => void;
 }
 
 export default class SingleTogglesContainer extends Component<SingleTogglesContainerProps> {
@@ -16,7 +16,7 @@ export default class SingleTogglesContainer extends Component<SingleTogglesConta
                         key={singleToggleIndex}
                         answerPair={answerPair}
                         activeIndex={this.props.activeAnswerIndices[singleToggleIndex]}
-                        onAnswerClick={(selectedAnswerIndex) => this.props.onAnswerClick(singleToggleIndex, selectedAnswerIndex)}/>
+                        onClick={() => this.props.onSingleToggleClick(singleToggleIndex)}/>
                 )}
             </div>
         );

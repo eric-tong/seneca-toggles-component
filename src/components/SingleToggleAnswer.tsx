@@ -3,13 +3,12 @@ import React, {Component} from "react";
 export interface SingleToggleProps {
     content: string;
     isActive: boolean;
-    onClick: () => void;
 }
 
 export default class SingleToggleAnswer extends Component<SingleToggleProps> {
     render() {
         return (
-            <div className={this.classNames} onClick={this.props.onClick}>
+            <div className={this.classNames}>
                 {this.props.content}
             </div>
         );

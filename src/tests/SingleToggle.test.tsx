@@ -13,7 +13,7 @@ describe("SingleToggle", () => {
     let props: SingleToggleProps = {
         answerPair: answerPair,
         activeIndex: 0,
-        onAnswerClick: setActiveState
+        onClick: setActiveState
     };
     let singleToggle = mount(<SingleToggle {...props} />);
 

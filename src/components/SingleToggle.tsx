@@ -4,13 +4,13 @@ import SingleToggleAnswer from "./SingleToggleAnswer";
 export interface SingleToggleProps {
     answerPair: [string, string];
     activeIndex: 0 | 1;
-    onAnswerClick: (activeIndex: 0 | 1) => void;
+    onClick: () => void;
 }
 
 export default class SingleToggle extends Component<SingleToggleProps> {
     render() {
         return (
-            <div className="single-toggle-wrapper">
+            <div className="single-toggle-wrapper" onClick={() => this.props.onClick()}>
                 <div className={this.sliderClassName}/>
                 <div className="single-toggle">
                     {this.props.answerPair.map((answer, index) =>
@@ -18,7 +18,6 @@ export default class SingleToggle extends Component<SingleToggleProps> {
                             key={index}
                             content={answer}
                             isActive={index == this.props.activeIndex}
-                            onClick={() => this.props.onAnswerClick(index ? 1 : 0)}
                         />
                     )}
                 </div>

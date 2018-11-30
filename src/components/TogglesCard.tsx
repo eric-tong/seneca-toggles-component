@@ -24,7 +24,7 @@ export default class TogglesCard extends Component<TogglesCardProps, TogglesCard
                 <SingleTogglesContainer
                     answerPairs={this.props.toggleQuestion.answerPairs}
                     activeAnswerIndices={this.state.activeAnswerIndices}
-                    onAnswerClick={this.onAnswerClick}/>
+                    onSingleToggleClick={this.onAnswerClick}/>
                 <p className="result">{this.isAllCorrect ? allCorrectResultMessage : incorrectResultMessage}</p>
             </div>
         );
@@ -45,10 +45,10 @@ export default class TogglesCard extends Component<TogglesCardProps, TogglesCard
     isCorrect = (activeAnswerIndex: 0 | 1, index: number) =>
         activeAnswerIndex == this.props.toggleQuestion.options[index].correctAnswerIndex;
 
-    onAnswerClick = (singleToggleIndex: number, selectedAnswerIndex: 0 | 1) => {
+    onAnswerClick = (singleToggleIndex: number) => {
         this.setState(prevState => {
             let activeAnswerIndices = prevState.activeAnswerIndices;
-            activeAnswerIndices[singleToggleIndex] = selectedAnswerIndex;
+            activeAnswerIndices[singleToggleIndex] = activeAnswerIndices[singleToggleIndex] ? 0 : 1;
             return {activeAnswerIndices: activeAnswerIndices};
         });
     };
