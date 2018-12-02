@@ -12,7 +12,7 @@ export interface SingleToggleProps {
 export default class SingleToggle extends Component<SingleToggleProps> {
     render() {
         return (
-            <div className="single-toggle-wrapper" onClick={() => this.props.onClick()}>
+            <div className="single-toggle-wrapper" onClick={this.props.onClick}>
                 <div className={this.sliderClassName} style={getSliderStyle(this.props.hue)}/>
                 <div className="single-toggle">
                     {this.props.answerPair.map((answer, index) =>

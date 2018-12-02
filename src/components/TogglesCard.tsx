@@ -52,7 +52,7 @@ export default class TogglesCard extends Component<TogglesCardProps, TogglesCard
     };
 
     static getDefaultActiveIndices = (props: TogglesCardProps) => {
-        return props.defaultActiveAnswerIndices ? props.defaultActiveAnswerIndices : props.toggleQuestion.incorrectAnswerIndices;
+        return props.defaultActiveAnswerIndices ? props.defaultActiveAnswerIndices.slice(0) : props.toggleQuestion.incorrectAnswerIndices;
     };
 
     static getCurrentScore = (activeAnswerIndices: (0 | 1)[], props: TogglesCardProps) => {
