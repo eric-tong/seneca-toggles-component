@@ -28,7 +28,7 @@ export default class TogglesCard extends Component<TogglesCardProps, TogglesCard
                 <SingleTogglesContainer
                     answerPairs={this.props.toggleQuestion.answerPairs}
                     activeAnswerIndices={this.state.activeAnswerIndices}
-                    onSingleToggleClick={this.onAnswerClick}
+                    onSingleToggleClick={this.onSingleToggleClick}
                     hue={this.singleToggleHue}/>
                 <p className="result">{this.isAllCorrect ? allCorrectResultMessage : incorrectResultMessage}</p>
                 {this.isAllCorrect ? <div className="reset" onClick={this.reset}>Reset</div> : null}
@@ -80,7 +80,7 @@ export default class TogglesCard extends Component<TogglesCardProps, TogglesCard
         return getSingleToggleHue(this.percentageScore);
     }
 
-    private onAnswerClick = (singleToggleIndex: number) => {
+    private onSingleToggleClick = (singleToggleIndex: number) => {
         if (!this.isAllCorrect) {
             this.switchToggleAtIndex(singleToggleIndex);
         }
