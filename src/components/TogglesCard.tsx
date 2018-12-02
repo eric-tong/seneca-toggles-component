@@ -30,6 +30,7 @@ export default class TogglesCard extends Component<TogglesCardProps, TogglesCard
                     onSingleToggleClick={this.onAnswerClick}
                     hue={this.singleToggleHue}/>
                 <p className="result">{this.isAllCorrect ? allCorrectResultMessage : incorrectResultMessage}</p>
+                {this.isAllCorrect ? <div className="reset" onClick={this.reset}>Reset</div> : null}
             </div>
         );
     }
@@ -76,17 +77,23 @@ export default class TogglesCard extends Component<TogglesCardProps, TogglesCard
         return getSingleToggleHue(this.percentageScore);
     }
 
-    onAnswerClick = (singleToggleIndex: number) => {
+    private onAnswerClick = (singleToggleIndex: number) => {
         if (!this.isAllCorrect) {
             this.switchToggleAtIndex(singleToggleIndex);
         }
     };
 
-    private switchToggleAtIndex(singleToggleIndex: number) {
+    private switchToggleAtIndex = (singleToggleIndex: number) => {
         this.setState(prevState => {
             let activeAnswerIndices = prevState.activeAnswerIndices;
             activeAnswerIndices[singleToggleIndex] = activeAnswerIndices[singleToggleIndex] ? 0 : 1;
             return {activeAnswerIndices: activeAnswerIndices};
         });
-    }
+    };
+
+    private reset = () => {
+        this.setState({
+            activeAnswerIndices: TogglesCard.getDefaultActiveIndices(this.props)
+        });
+    };
 }

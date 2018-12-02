@@ -41,6 +41,7 @@ html {
 //region Content
 //==============================================
 .toggles-card {
+  position: relative;
   display: flex;
   max-width: 50rem;
   margin: 2rem auto;
@@ -96,7 +97,6 @@ html {
         cursor: pointer;
 
         .answer {
-          @include transition(color 300ms);
           width: 50%;
           text-align: center;
           padding: 0.25rem $singleToggleHeight / 2;
@@ -112,7 +112,19 @@ html {
       }
     }
   }
-}
 
+  .reset {
+    position: absolute;
+    margin: 1rem 1.5rem;
+    padding: 0.25rem;
+    right: 0;
+    bottom: 0;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
 //==============================================
 //endregion
