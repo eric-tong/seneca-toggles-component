@@ -1,16 +1,19 @@
 import {darkBlueHue, darkRedHue, darkYellowHue, lightRedHue, lightYellowHue} from "../constants/Colors";
 
-export const getTogglesCardStyle = (percentageScore: number) => {
+export const getTogglesCardStyle: (percentageScore: number) => { backgroundImage: string, pointerEvents: "all" | "none" }
+    = (percentageScore: number) => {
     if (percentageScore < 1) {
         const lightHue = interpolate(lightRedHue, lightYellowHue, percentageScore);
         const darkHue = interpolate(darkRedHue, darkYellowHue, percentageScore);
         return {
-            backgroundImage: `linear-gradient(to bottom, hsla(${lightHue}deg, 93.9%, 68%, 0.7), hsla(${darkHue}deg, 93.2%, 53.9%, 0.69))`
+            backgroundImage: `linear-gradient(to bottom, hsla(${lightHue}deg, 93.9%, 68%, 0.7), hsla(${darkHue}deg, 93.2%, 53.9%, 0.69))`,
+            pointerEvents: "all"
         };
     } else {
         // noinspection SpellCheckingInspection
         return {
-            backgroundImage: "linear-gradient(to bottom, #47E4C1, #07CDDD)"
+            backgroundImage: "linear-gradient(to bottom, #47E4C1, #07CDDD)",
+            pointerEvents: "none"
         };
     }
 };
