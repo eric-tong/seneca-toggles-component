@@ -56,4 +56,18 @@ describe("TogglesCard", () => {
 
         expect(actual).toEqual(expected);
     });
+
+    it("Locks when all responses are correct", () => {
+        const activeAnswerIndices: (0 | 1)[] = [0, 0, 1, 1];
+        togglesCard.setState({activeAnswerIndices: activeAnswerIndices});
+        const singleToggleAnswerDivs = togglesCard.find(".single-toggle");
+
+        singleToggleAnswerDivs.at(0).simulate("click");
+        singleToggleAnswerDivs.at(2).simulate("click");
+
+        let actual = togglesCard.state("activeAnswerIndices");
+        let expected = [0, 0, 1, 1];
+
+        expect(actual).toEqual(expected);
+    });
 });
