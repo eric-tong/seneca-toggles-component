@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import SingleTogglesContainer from "./SingleTogglesContainer";
 import ToggleQuestion from "../models/ToggleQuestion";
 import {allCorrectResultMessage, incorrectResultMessage} from "../constants/Strings";
-import {getTogglesCardStyle} from "../styles/TogglesCardStyles";
+import {getSingleToggleHue, getTogglesCardStyle} from "../styles/TogglesCardStyles";
 
 export interface TogglesCardProps {
     toggleQuestion: ToggleQuestion;
@@ -24,6 +24,7 @@ export default class TogglesCard extends Component<TogglesCardProps, TogglesCard
         const isAllCorrect = currentScore == this.props.toggleQuestion.options.length;
 
         const togglesCardStyle = getTogglesCardStyle(percentageScore);
+        const singleToggleHue = getSingleToggleHue(percentageScore);
 
         return (
             <div className="toggles-card" style={togglesCardStyle}>
@@ -31,7 +32,8 @@ export default class TogglesCard extends Component<TogglesCardProps, TogglesCard
                 <SingleTogglesContainer
                     answerPairs={this.props.toggleQuestion.answerPairs}
                     activeAnswerIndices={this.state.activeAnswerIndices}
-                    onSingleToggleClick={this.onAnswerClick}/>
+                    onSingleToggleClick={this.onAnswerClick}
+                    hue={singleToggleHue}/>
                 <p className="result">{isAllCorrect ? allCorrectResultMessage : incorrectResultMessage}</p>
             </div>
         );

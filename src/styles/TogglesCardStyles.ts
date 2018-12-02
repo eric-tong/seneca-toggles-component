@@ -1,4 +1,4 @@
-import {darkRedHue, darkYellowHue, lightRedHue, lightYellowHue} from "../constants/Colors";
+import {darkBlueHue, darkRedHue, darkYellowHue, lightRedHue, lightYellowHue} from "../constants/Colors";
 
 export const getTogglesCardStyle = (percentageScore: number) => {
     if (percentageScore < 1) {
@@ -10,12 +10,43 @@ export const getTogglesCardStyle = (percentageScore: number) => {
     } else {
         // noinspection SpellCheckingInspection
         return {
-            backgroundImage: "linear-gradient(to bottom, #47E4c1, #07CDDD)"
+            backgroundImage: "linear-gradient(to bottom, #47E4C1, #07CDDD)"
         };
     }
+};
+
+export const getSingleToggleHue = (percentageScore: number) => {
+    if (percentageScore < 1) {
+        return interpolate(darkRedHue, darkYellowHue, percentageScore);
+    } else {
+        return darkBlueHue;
+    }
+};
+
+export const getSliderStyle = (hue: number = average(lightRedHue, darkRedHue)) => {
+    return {
+        boxShadow: `0 0 6px 1px hsla(${hue}deg, 58.5%, 48.2%, 0.4)`
+    };
+};
+
+export const getSingleToggleAnswerStyle = (hue: number = average(lightRedHue, darkRedHue)) => {
+    let color: string;
+
+    if (hue < 50) {
+        color = `hsl(${hue}deg, 75.8%, 59.4%)`;
+    } else {
+        color = `hsl(${hue}deg, 100%, 34.5%)`;
+    }
+    return {
+        color: color
+    };
 };
 
 const interpolate = (from: number, to: number, percentage: number) => {
     const range = to - from;
     return from + range * percentage;
+};
+
+const average = (a: number, b: number) => {
+    return (a + b) / 2;
 };
