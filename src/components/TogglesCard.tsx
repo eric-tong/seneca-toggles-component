@@ -43,17 +43,25 @@ export default class TogglesCard extends Component<TogglesCardProps, TogglesCard
     }
 
     static getCurrentScore = (activeAnswerIndices: (0 | 1)[], options: ToggleOption[]) => {
-        const isCorrect = (activeAnswerIndex: 0 | 1, index: number) =>
-            activeAnswerIndex == options[index].correctAnswerIndex;
-        return activeAnswerIndices.filter(isCorrect).length;
+        if (options.length > 0) {
+            const isCorrect = (activeAnswerIndex: 0 | 1, index: number) =>
+                activeAnswerIndex == options[index].correctAnswerIndex;
+            return activeAnswerIndices.filter(isCorrect).length;
+        } else {
+            return 0;
+        }
     };
 
     private get percentageScore() {
-        return this.state.currentScore / this.props.toggleQuestion.options.length;
+        if (this.state.currentScore > 0) {
+            return this.state.currentScore / this.props.toggleQuestion.options.length;
+        } else {
+            return 0;
+        }
     }
 
     private get isAllCorrect() {
-        return this.state.currentScore == this.props.toggleQuestion.options.length;
+        return this.state.currentScore > 0 && this.state.currentScore == this.props.toggleQuestion.options.length;
     }
 
     private get className() {
