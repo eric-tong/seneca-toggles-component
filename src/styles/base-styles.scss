@@ -10,6 +10,8 @@ $singleToggleBorderColor: #FBFBFB;
 
 $defaultFontSize: 14px;
 $singleToggleHeight: 3.5rem;
+$mediumBreakpoint: 768px;
+$smallBreakpoint: 320px;
 //==============================================
 //endregion
 
@@ -20,12 +22,16 @@ $singleToggleHeight: 3.5rem;
 html {
   font-size: $defaultFontSize;
   font-family: "Muli", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+
+  @media (max-width: $smallBreakpoint) {
+    font-size: 4.375vw;
+  }
 }
 
 //==============================================
 //endregion
 
-//region Header
+//region Mixins
 //==============================================
 @mixin transition($args...) {
   -webkit-transition: $args;
@@ -48,6 +54,7 @@ html {
   flex-direction: column;
   align-items: center;
   padding: 4rem 2rem;
+  overflow: hidden;
   color: white;
   border-radius: 0.5rem;
   box-shadow: 0 0.25rem 1rem 0.5rem $greyShadowColor;
@@ -95,6 +102,10 @@ html {
         border-radius: $singleToggleHeight / 2;
         box-sizing: border-box;
         cursor: pointer;
+
+        @media (max-width: $mediumBreakpoint) {
+          min-width: 0;
+        }
 
         .answer {
           @include transition(color 300ms);
