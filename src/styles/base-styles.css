@@ -1,0 +1,108 @@
+@import url("https://fonts.googleapis.com/css?family=Muli:700");
+html {
+  font-size: 14px;
+  font-family: "Muli", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+@media (max-width: 320px) {
+  html {
+    font-size: 4.375vw;
+  }
+}
+
+.toggles-card {
+  position: relative;
+  display: flex;
+  max-width: 50rem;
+  margin: 2rem auto;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 2rem;
+  overflow: hidden;
+  color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.25rem 1rem 0.5rem rgba(167, 196, 220, 0.5);
+  background: white linear-gradient(to bottom, rgba(250, 145, 97, 0.7), rgba(247, 57, 28, 0.69));
+}
+.toggles-card p {
+  text-align: center;
+}
+.toggles-card .single-toggles-container {
+  margin: 3rem 0;
+}
+.toggles-card .single-toggles-container .single-toggle-wrapper {
+  position: relative;
+  min-height: 3.5rem;
+  margin: 0.75rem 0;
+}
+.toggles-card .single-toggles-container .single-toggle-wrapper .slider {
+  -webkit-transition: left 300ms ease-in-out;
+  -moz-transition: left 300ms ease-in-out;
+  -ms-transition: left 300ms ease-in-out;
+  -o-transition: left 300ms ease-in-out;
+  transition: left 300ms ease-in-out;
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  border-radius: 1.75rem;
+  background: rgba(249, 249, 249, 0.5);
+  box-shadow: 0 0 6px 1px rgba(195, 77, 51, 0.4);
+}
+.toggles-card .single-toggles-container .single-toggle-wrapper .slider.left {
+  left: 0;
+}
+.toggles-card .single-toggles-container .single-toggle-wrapper .slider.right {
+  left: 50%;
+}
+.toggles-card .single-toggles-container .single-toggle-wrapper .single-toggle {
+  position: relative;
+  min-width: 22rem;
+  min-height: 3.5rem;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  border: 1px solid #FBFBFB;
+  border-radius: 1.75rem;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  .toggles-card .single-toggles-container .single-toggle-wrapper .single-toggle {
+    min-width: 0;
+  }
+}
+.toggles-card .single-toggles-container .single-toggle-wrapper .single-toggle .answer {
+  -webkit-transition: color 300ms;
+  -moz-transition: color 300ms;
+  -ms-transition: color 300ms;
+  -o-transition: color 300ms;
+  transition: color 300ms;
+  width: 50%;
+  text-align: center;
+  padding: 0.25rem 1.75rem;
+}
+.toggles-card .single-toggles-container .single-toggle-wrapper .single-toggle .answer.active {
+  color: #e66649;
+}
+.toggles-card .single-toggles-container .single-toggle-wrapper .single-toggle .answer:hover:not(.active) {
+  opacity: 0.8;
+}
+.toggles-card .reset {
+  position: absolute;
+  margin: 1rem 1.5rem;
+  padding: 0.25rem;
+  right: 0;
+  bottom: 0;
+  cursor: pointer;
+}
+.toggles-card .reset:hover {
+  opacity: 0.8;
+}
+.toggles-card.unclickable .single-toggle {
+  cursor: default !important;
+}
+.toggles-card.unclickable .answer:hover {
+  opacity: 1 !important;
+}
+
+/*# sourceMappingURL=base-styles.css.map */

@@ -19,7 +19,6 @@
 .env.production.local
 
 # compiled files
-*.css
 *.css.map
 
 npm-debug.log*
