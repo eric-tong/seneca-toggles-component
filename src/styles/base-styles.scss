@@ -97,6 +97,7 @@ html {
         cursor: pointer;
 
         .answer {
+          @include transition(color 300ms);
           width: 50%;
           text-align: center;
           padding: 0.25rem $singleToggleHeight / 2;
@@ -123,6 +124,16 @@ html {
 
     &:hover {
       opacity: 0.8;
+    }
+  }
+
+  &.unclickable {
+    .single-toggle {
+      cursor: default !important;
+    }
+
+    .answer:hover {
+      opacity: 1 !important;
     }
   }
 }

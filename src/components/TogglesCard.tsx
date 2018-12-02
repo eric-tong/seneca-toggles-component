@@ -22,7 +22,7 @@ export default class TogglesCard extends Component<TogglesCardProps, TogglesCard
 
     render() {
         return (
-            <div className="toggles-card" style={this.togglesCardStyle}>
+            <div className={this.className} style={this.togglesCardStyle}>
                 <p className="statement">{this.props.toggleQuestion.statement}</p>
                 <SingleTogglesContainer
                     answerPairs={this.props.toggleQuestion.answerPairs}
@@ -67,6 +67,14 @@ export default class TogglesCard extends Component<TogglesCardProps, TogglesCard
 
     get isAllCorrect() {
         return this.state.currentScore == this.props.toggleQuestion.options.length;
+    }
+
+    get className() {
+        let className = "toggles-card";
+        if (this.isAllCorrect) {
+            className += " unclickable";
+        }
+        return className;
     }
 
     get togglesCardStyle() {
