@@ -11,44 +11,57 @@ export interface TogglesCardProps {
 
 export interface TogglesCardState {
     activeAnswerIndices: (0 | 1)[];
+    currentScore: number;
 }
 
 export default class TogglesCard extends Component<TogglesCardProps, TogglesCardState> {
     state = {
-        activeAnswerIndices: this.defaultActiveAnswerIndices
+        activeAnswerIndices: this.defaultActiveAnswerIndices,
+        currentScore: 0
     };
 
     render() {
-        const currentScore = this.currentScore;
-        const percentageScore = currentScore / this.props.toggleQuestion.options.length;
-        const isAllCorrect = currentScore == this.props.toggleQuestion.options.length;
-
-        const togglesCardStyle = getTogglesCardStyle(percentageScore);
-        const singleToggleHue = getSingleToggleHue(percentageScore);
-
         return (
-            <div className="toggles-card" style={togglesCardStyle}>
+            <div className="toggles-card" style={this.togglesCardStyle}>
                 <p className="statement">{this.props.toggleQuestion.statement}</p>
                 <SingleTogglesContainer
                     answerPairs={this.props.toggleQuestion.answerPairs}
                     activeAnswerIndices={this.state.activeAnswerIndices}
                     onSingleToggleClick={this.onAnswerClick}
-                    hue={singleToggleHue}/>
-                <p className="result">{isAllCorrect ? allCorrectResultMessage : incorrectResultMessage}</p>
+                    hue={this.singleToggleHue}/>
+                <p className="result">{this.isAllCorrect ? allCorrectResultMessage : incorrectResultMessage}</p>
             </div>
         );
+    }
+
+    static getDerivedStateFromProps(props: TogglesCardProps, state: TogglesCardState) {
+        const isCorrect = (activeAnswerIndex: 0 | 1, index: number) =>
+            activeAnswerIndex == props.toggleQuestion.options[index].correctAnswerIndex;
+
+        return {
+            currentScore: state.activeAnswerIndices.filter(isCorrect).length
+        }
+    }
+
+    get togglesCardStyle() {
+        return getTogglesCardStyle(this.percentageScore);
+    }
+
+    get singleToggleHue() {
+        return getSingleToggleHue(this.percentageScore);
+    }
+
+    get percentageScore() {
+        return this.state.currentScore / this.props.toggleQuestion.options.length;
+    }
+
+    get isAllCorrect() {
+        return this.state.currentScore == this.props.toggleQuestion.options.length;
     }
 
     get defaultActiveAnswerIndices() {
         return this.props.defaultActiveAnswerIndices ? this.props.defaultActiveAnswerIndices : this.props.toggleQuestion.incorrectAnswerIndices;
     }
-
-    get currentScore() {
-        return this.state.activeAnswerIndices.filter(this.isCorrect).length;
-    }
-
-    isCorrect = (activeAnswerIndex: 0 | 1, index: number) =>
-        activeAnswerIndex == this.props.toggleQuestion.options[index].correctAnswerIndex;
 
     onAnswerClick = (singleToggleIndex: number) => {
         this.setState(prevState => {

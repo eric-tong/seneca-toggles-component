@@ -16,7 +16,7 @@ const activeAnswersIndices: (0 | 1)[] = [0, 0, 0, 0];
 configure({adapter: new Adapter()});
 describe("TogglesCard", () => {
     let props: TogglesCardProps = {toggleQuestion: toggleQuestion};
-    let state: TogglesCardState = {activeAnswerIndices: activeAnswersIndices};
+    let state: TogglesCardState = {activeAnswerIndices: activeAnswersIndices, currentScore: 0};
     let togglesCard: ReactWrapper<TogglesCardProps, TogglesCardState, TogglesCard> = mount(<TogglesCard {...props} />);
 
     beforeEach(() => {
@@ -51,7 +51,7 @@ describe("TogglesCard", () => {
         const activeAnswerIndices: (0 | 1)[] = [0, 0, 0, 0];
         togglesCard.setState({activeAnswerIndices: activeAnswerIndices});
 
-        let actual = togglesCard.instance().currentScore;
+        let actual = togglesCard.state().currentScore;
         let expected = 2;
 
         expect(actual).toEqual(expected);
