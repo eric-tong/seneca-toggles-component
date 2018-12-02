@@ -53,7 +53,7 @@ html {
   margin: 2rem auto;
   flex-direction: column;
   align-items: center;
-  padding: 4rem 2rem;
+  padding: 3rem 2rem;
   overflow: hidden;
   color: white;
   border-radius: 0.5rem;
@@ -65,7 +65,7 @@ html {
   }
 
   .single-toggles-container {
-    margin: 3rem 0;
+    margin: 2rem 0;
 
     .single-toggle-wrapper {
       position: relative;
@@ -102,6 +102,7 @@ html {
         border-radius: $singleToggleHeight / 2;
         box-sizing: border-box;
         cursor: pointer;
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
 
         @media (max-width: $mediumBreakpoint) {
           min-width: 0;
