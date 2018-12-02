@@ -104,6 +104,10 @@ html {
           &.active {
             color: $redFontColor;
           }
+
+          &:hover:not(.active) {
+            opacity: 0.8;
+          }
         }
       }
     }
