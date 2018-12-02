@@ -24,19 +24,26 @@ export const getSingleToggleHue = (percentageScore: number) => {
 };
 
 export const getSliderStyle = (hue: number = average(lightRedHue, darkRedHue)) => {
+    let shadowColor: string;
+    if (hue < 50) {
+        shadowColor = `hsla(${hue}deg, 58.5%, 48.2%, 0.4)`;
+    } else {
+        shadowColor = `hsla(${hue}deg, 51.1%, 44.8%, 0.5)`;
+    }
+
     return {
-        boxShadow: `0 0 6px 1px hsla(${hue}deg, 58.5%, 48.2%, 0.4)`
+        boxShadow: `0 0 6px 1px ${shadowColor}`
     };
 };
 
 export const getSingleToggleAnswerStyle = (hue: number = average(lightRedHue, darkRedHue)) => {
     let color: string;
-
     if (hue < 50) {
         color = `hsl(${hue}deg, 75.8%, 59.4%)`;
     } else {
         color = `hsl(${hue}deg, 100%, 34.5%)`;
     }
+
     return {
         color: color
     };
