@@ -9,10 +9,6 @@ export default class ToggleQuestion {
         this.options = options;
     }
 
-    get incorrectAnswerIndices() {
-        return this.options.map(option => option.correctAnswerIndex ? 0 : 1);
-    }
-
     get answerPairs() {
         let toAnswerPair = (option: ToggleOption) => option.answerPair;
         return this.options.map(toAnswerPair);

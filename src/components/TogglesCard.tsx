@@ -3,10 +3,11 @@ import SingleTogglesContainer from "./SingleTogglesContainer";
 import ToggleQuestion from "../models/ToggleQuestion";
 import {allCorrectResultMessage, incorrectResultMessage} from "../constants/Strings";
 import {getSingleToggleHue, getTogglesCardStyle} from "../styles/TogglesCardStyles";
+import ToggleOption from "../models/ToggleOption";
 
 export interface TogglesCardProps {
     toggleQuestion: ToggleQuestion;
-    defaultActiveAnswerIndices?: (0 | 1)[];
+    defaultActiveAnswerIndices: (0 | 1)[];
 }
 
 export interface TogglesCardState {
@@ -16,7 +17,7 @@ export interface TogglesCardState {
 
 export default class TogglesCard extends Component<TogglesCardProps, TogglesCardState> {
     state = {
-        activeAnswerIndices: [],
+        activeAnswerIndices: this.props.defaultActiveAnswerIndices.slice(0),
         currentScore: 0
     };
 
@@ -36,28 +37,14 @@ export default class TogglesCard extends Component<TogglesCardProps, TogglesCard
     }
 
     static getDerivedStateFromProps(props: TogglesCardProps, state: TogglesCardState) {
-        let activeAnswerIndices = state.activeAnswerIndices;
-        if (TogglesCard.shouldResetIndices(activeAnswerIndices, props)) {
-            activeAnswerIndices = TogglesCard.getDefaultActiveIndices(props);
-        }
-
         return {
-            activeAnswerIndices: activeAnswerIndices,
-            currentScore: TogglesCard.getCurrentScore(activeAnswerIndices, props)
+            currentScore: TogglesCard.getCurrentScore(state.activeAnswerIndices, props.toggleQuestion.options)
         };
     }
 
-    static shouldResetIndices = (activeAnswerIndices: (0 | 1)[], props: TogglesCardProps) => {
-        return activeAnswerIndices.length != props.toggleQuestion.options.length;
-    };
-
-    static getDefaultActiveIndices = (props: TogglesCardProps) => {
-        return props.defaultActiveAnswerIndices ? props.defaultActiveAnswerIndices.slice(0) : props.toggleQuestion.incorrectAnswerIndices;
-    };
-
-    static getCurrentScore = (activeAnswerIndices: (0 | 1)[], props: TogglesCardProps) => {
+    static getCurrentScore = (activeAnswerIndices: (0 | 1)[], options: ToggleOption[]) => {
         const isCorrect = (activeAnswerIndex: 0 | 1, index: number) =>
-            activeAnswerIndex == props.toggleQuestion.options[index].correctAnswerIndex;
+            activeAnswerIndex == options[index].correctAnswerIndex;
         return activeAnswerIndices.filter(isCorrect).length;
     };
 
@@ -101,7 +88,7 @@ export default class TogglesCard extends Component<TogglesCardProps, TogglesCard
 
     private reset = () => {
         this.setState({
-            activeAnswerIndices: TogglesCard.getDefaultActiveIndices(this.props)
+            activeAnswerIndices: this.props.defaultActiveAnswerIndices.slice(0)
         });
     };
 }

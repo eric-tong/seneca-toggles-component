@@ -15,7 +15,7 @@ const activeAnswersIndices: (0 | 1)[] = [0, 0, 0, 0];
 
 configure({adapter: new Adapter()});
 describe("TogglesCard", () => {
-    let props: TogglesCardProps = {toggleQuestion: toggleQuestion};
+    let props: TogglesCardProps = {toggleQuestion: toggleQuestion, defaultActiveAnswerIndices: [1, 1, 0, 0]};
     let state: TogglesCardState = {activeAnswerIndices: activeAnswersIndices, currentScore: 0};
     let togglesCard: ReactWrapper<TogglesCardProps, TogglesCardState, TogglesCard> = mount(<TogglesCard {...props} />);
 
