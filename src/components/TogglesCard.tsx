@@ -16,7 +16,7 @@ export interface TogglesCardState {
 
 export default class TogglesCard extends Component<TogglesCardProps, TogglesCardState> {
     state = {
-        activeAnswerIndices: this.defaultActiveAnswerIndices,
+        activeAnswerIndices: [],
         currentScore: 0
     };
 
@@ -35,21 +35,30 @@ export default class TogglesCard extends Component<TogglesCardProps, TogglesCard
     }
 
     static getDerivedStateFromProps(props: TogglesCardProps, state: TogglesCardState) {
-        const isCorrect = (activeAnswerIndex: 0 | 1, index: number) =>
-            activeAnswerIndex == props.toggleQuestion.options[index].correctAnswerIndex;
+        let activeAnswerIndices = state.activeAnswerIndices;
+        if (TogglesCard.shouldResetIndices(activeAnswerIndices, props)) {
+            activeAnswerIndices = TogglesCard.getDefaultActiveIndices(props);
+        }
 
         return {
-            currentScore: state.activeAnswerIndices.filter(isCorrect).length
+            activeAnswerIndices: activeAnswerIndices,
+            currentScore: TogglesCard.getCurrentScore(activeAnswerIndices, props)
         };
     }
 
-    get togglesCardStyle() {
-        return getTogglesCardStyle(this.percentageScore);
-    }
+    static shouldResetIndices = (activeAnswerIndices: (0 | 1)[], props: TogglesCardProps) => {
+        return activeAnswerIndices.length != props.toggleQuestion.options.length;
+    };
 
-    get singleToggleHue() {
-        return getSingleToggleHue(this.percentageScore);
-    }
+    static getDefaultActiveIndices = (props: TogglesCardProps) => {
+        return props.defaultActiveAnswerIndices ? props.defaultActiveAnswerIndices : props.toggleQuestion.incorrectAnswerIndices;
+    };
+
+    static getCurrentScore = (activeAnswerIndices: (0 | 1)[], props: TogglesCardProps) => {
+        const isCorrect = (activeAnswerIndex: 0 | 1, index: number) =>
+            activeAnswerIndex == props.toggleQuestion.options[index].correctAnswerIndex;
+        return activeAnswerIndices.filter(isCorrect).length;
+    };
 
     get percentageScore() {
         return this.state.currentScore / this.props.toggleQuestion.options.length;
@@ -59,8 +68,12 @@ export default class TogglesCard extends Component<TogglesCardProps, TogglesCard
         return this.state.currentScore == this.props.toggleQuestion.options.length;
     }
 
-    get defaultActiveAnswerIndices() {
-        return this.props.defaultActiveAnswerIndices ? this.props.defaultActiveAnswerIndices : this.props.toggleQuestion.incorrectAnswerIndices;
+    get togglesCardStyle() {
+        return getTogglesCardStyle(this.percentageScore);
+    }
+
+    get singleToggleHue() {
+        return getSingleToggleHue(this.percentageScore);
     }
 
     onAnswerClick = (singleToggleIndex: number) => {

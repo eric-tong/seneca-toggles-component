@@ -70,4 +70,21 @@ describe("TogglesCard", () => {
 
         expect(actual).toEqual(expected);
     });
+
+    it("Resets to default active indices if the number of options changes", () => {
+        const activeAnswerIndices: (0 | 1)[] = [0, 0, 1, 1];
+        togglesCard.setState({activeAnswerIndices: activeAnswerIndices});
+        const defaultActiveAnswerIndices: (0 | 1)[] = [1, 1, 1, 1, 1];
+
+        let toggleQuestion = togglesCard.props().toggleQuestion;
+        toggleQuestion.options.push(new ToggleOption("Answer 5-1", "Answer 5-2", 1));
+        togglesCard.setProps({
+            toggleQuestion: toggleQuestion,
+            defaultActiveAnswerIndices: defaultActiveAnswerIndices
+        });
+
+        let actual = togglesCard.state("activeAnswerIndices");
+
+        expect(actual).toEqual(defaultActiveAnswerIndices);
+    });
 });
