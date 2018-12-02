@@ -4,8 +4,8 @@ import SingleToggle from "./SingleToggle";
 export interface SingleTogglesContainerProps {
     answerPairs: [string, string][];
     activeAnswerIndices: (0 | 1)[];
-    hue?: number;
     onSingleToggleClick: (singleToggleIndex: number) => void;
+    hue?: number;
 }
 
 export default class SingleTogglesContainer extends Component<SingleTogglesContainerProps> {
