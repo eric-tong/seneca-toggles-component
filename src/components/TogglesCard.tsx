@@ -40,7 +40,7 @@ export default class TogglesCard extends Component<TogglesCardProps, TogglesCard
 
         return {
             currentScore: state.activeAnswerIndices.filter(isCorrect).length
-        }
+        };
     }
 
     get togglesCardStyle() {
@@ -64,10 +64,16 @@ export default class TogglesCard extends Component<TogglesCardProps, TogglesCard
     }
 
     onAnswerClick = (singleToggleIndex: number) => {
+        if (!this.isAllCorrect) {
+            this.switchToggleAtIndex(singleToggleIndex);
+        }
+    };
+
+    private switchToggleAtIndex(singleToggleIndex: number) {
         this.setState(prevState => {
             let activeAnswerIndices = prevState.activeAnswerIndices;
             activeAnswerIndices[singleToggleIndex] = activeAnswerIndices[singleToggleIndex] ? 0 : 1;
             return {activeAnswerIndices: activeAnswerIndices};
         });
-    };
+    }
 }
