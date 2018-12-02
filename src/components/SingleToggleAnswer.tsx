@@ -16,11 +16,11 @@ export default class SingleToggleAnswer extends Component<SingleToggleProps> {
         );
     }
 
-    get singleToggleAnswerStyle() {
+    private get singleToggleAnswerStyle() {
         return this.props.isActive ? getSingleToggleAnswerStyle(this.props.hue) : undefined;
     }
 
-    get classNames() {
+    private get classNames() {
         let className = "answer";
         if (this.props.isActive) {
             className += " active";

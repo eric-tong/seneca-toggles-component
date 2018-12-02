@@ -18,10 +18,6 @@ describe("SingleToggle", () => {
     };
     let singleToggle = mount(<SingleToggle {...props} />);
 
-    beforeEach(() => {
-        singleToggle.setProps(props);
-    });
-
     it("Contains two answersContent", () => {
         const answerDivs = singleToggle.find(".answer");
 

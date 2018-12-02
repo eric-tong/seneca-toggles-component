@@ -27,7 +27,7 @@ export default class SingleToggle extends Component<SingleToggleProps> {
         );
     }
 
-    get sliderClassName() {
+    private get sliderClassName() {
         return "slider " + (this.props.activeIndex ? "right" : "left");
     }
 }

@@ -61,15 +61,15 @@ export default class TogglesCard extends Component<TogglesCardProps, TogglesCard
         return activeAnswerIndices.filter(isCorrect).length;
     };
 
-    get percentageScore() {
+    private get percentageScore() {
         return this.state.currentScore / this.props.toggleQuestion.options.length;
     }
 
-    get isAllCorrect() {
+    private get isAllCorrect() {
         return this.state.currentScore == this.props.toggleQuestion.options.length;
     }
 
-    get className() {
+    private get className() {
         let className = "toggles-card";
         if (this.isAllCorrect) {
             className += " unclickable";
@@ -77,11 +77,11 @@ export default class TogglesCard extends Component<TogglesCardProps, TogglesCard
         return className;
     }
 
-    get togglesCardStyle() {
+    private get togglesCardStyle() {
         return getTogglesCardStyle(this.percentageScore);
     }
 
-    get singleToggleHue() {
+    private get singleToggleHue() {
         return getSingleToggleHue(this.percentageScore);
     }
 
